@@ -77,6 +77,8 @@
   "detection_device_bluetooth_name": "Bluetooth-Name",
   "detection_device_bluetooth_strength": "Signalstärke",
   "detection_detector_created_at": "hinzugefügt am {date}",
+  "detection_device" : "Gerät",
+  "detection_location" : "Ort",
   "@detection_detector_created_at": {
     "placeholders": {
       "date": {

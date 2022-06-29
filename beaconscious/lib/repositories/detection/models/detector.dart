@@ -6,7 +6,8 @@ abstract class Detector extends Equatable {
   final String name;
   final DateTime creationDate;
 
-  const Detector({required this.id, required this.name, required this.creationDate});
+  const Detector(
+      {required this.id, required this.name, required this.creationDate});
 
   O accept<I, O>(DetectorVisitor<I, O> visitor, I state);
 
