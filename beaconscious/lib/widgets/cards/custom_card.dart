@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
   final IconData leading;
+  final Color? backgroundColor;
+
   final String title;
   final Color? titleColor;
 
@@ -21,6 +23,7 @@ class CustomCard extends StatelessWidget {
       {super.key,
       required this.leading,
       required this.title,
+      this.backgroundColor,
       this.titleColor,
       this.onTap,
       this.subtitle,
@@ -31,7 +34,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-        color: Theme.of(context).colorScheme.surfaceVariant,
+    color: backgroundColor ?? Theme.of(context).colorScheme.surfaceVariant,
         child: InkWell(
           borderRadius: BorderRadius.circular(12.0),
           onTap: onTap,
@@ -40,6 +43,8 @@ class CustomCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -51,36 +56,36 @@ class CustomCard extends StatelessWidget {
                             backgroundColor:
                                 Theme.of(context).colorScheme.primary,
                             radius: 20,
-                            child: Icon(
-                              leading,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              size: 32,
-                            ),
-                          ),
+                        child: Icon(
+                          leading,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          size: 32,
                         ),
-                        CardTitle(
-                          title: title,
-                          subtitle: subtitle,
-                          titleColor: titleColor,
-                          subtitleColor: subtitleColor,
-                        ),
-                        const Spacer(),
-                        if (action != null) action!
-                      ],
+                      ),
                     ),
-                    if (content != null) ...[
-                      Container(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                        child: content,
-                      )
-                    ],
-                    if (caption != null) ...[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
-                        child: caption!,
-                      )
-                    ]
+                    CardTitle(
+                      title: title,
+                      subtitle: subtitle,
+                      titleColor: titleColor,
+                      subtitleColor: subtitleColor,
+                    ),
+                    const Spacer(),
+                    if (action != null) action!
                   ],
+                ),
+                if (content != null) ...[
+                  Container(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    child: content,
+                  )
+                ],
+                if (caption != null) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: caption!,
+                  )
+                ]
+              ],
                 ),
               )),
         ),

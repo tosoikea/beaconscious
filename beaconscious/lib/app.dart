@@ -1,3 +1,4 @@
+import 'package:beaconscious/blocs/analysis/analysis.dart';
 import 'package:beaconscious/blocs/detection/detection_cubit.dart';
 import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/blocs/navigation/navigation.dart';
@@ -7,10 +8,12 @@ import 'package:beaconscious/repositories/detection/detection_repository.dart';
 import 'package:beaconscious/repositories/detection/dummy_detection_repository.dart';
 import 'package:beaconscious/repositories/environments/dummy_environments_repository.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:beaconscious/repositories/logbook/dummy_logbook_repository.dart';
+import 'package:beaconscious/repositories/logbook/logbook_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class BeaconsciousApp extends StatelessWidget {
@@ -18,16 +21,24 @@ class BeaconsciousApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MultiRepositoryProvider(
-          providers: [
+      providers: [
             RepositoryProvider<DetectionRepository>(
                 create: (_) => DummyDetectionRepository()),
             RepositoryProvider<EnvironmentsRepository>(
-                create: (_) => DummyEnvironmentsRepository())
+                create: (_) => DummyEnvironmentsRepository()),
+            RepositoryProvider<LogbookRepository>(
+                create: (_) => DummyLogbookRepository()),
           ],
-          child: MultiBlocProvider(providers: [
+      child: MultiBlocProvider(providers: [
             BlocProvider(
               lazy: false,
               create: (_) => NavigationCubit(),
+            ),
+            BlocProvider(
+              lazy: false,
+              create: (context) => AnalysisCubit(
+                  RepositoryProvider.of<LogbookRepository>(context),
+                  BlocProvider.of<NavigationCubit>(context)),
             ),
             BlocProvider(
                 lazy: false,
@@ -54,14 +65,14 @@ class _BeaconsciousAppInternal extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           appBarTheme: const AppBarTheme(
-              // SURFACE
+            // SURFACE
               titleTextStyle: TextStyle(
-            // ON SURFACE
-            color: Color(0xFF1B1B1F),
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Oxygen',
-          )),
+                // ON SURFACE
+                color: Color(0xFF1B1B1F),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Oxygen',
+              )),
           useMaterial3: true,
           colorScheme: const ColorScheme(
               brightness: Brightness.light,

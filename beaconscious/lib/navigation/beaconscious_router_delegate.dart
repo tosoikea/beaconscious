@@ -66,9 +66,40 @@ class BeaconsciousRouterDelegate extends RouterDelegate<RoutePath>
               ));
 
   @override
-  Future<void> setNewRoutePath(RoutePath configuration) {
-    // TODO: implement setNewRoutePath
-    throw UnimplementedError();
+  Future<void> setNewRoutePath(RoutePath configuration) async {
+    /// 1. Context Home
+    /// A) Navigate To Home
+    if (configuration is HomeRoutePath) {
+      _navigationCubit.toHome();
+    }
+
+    /// 2. Context Environment
+    /// A) Navigate To Environments
+    /// B) Create Environment
+    else if (configuration is EnvironmentRoutePath) {
+      if (configuration is! EnvironmentCreationRoute) {
+        _navigationCubit.toEnvironments();
+      } else {
+        _navigationCubit.createEnvironment();
+      }
+    }
+
+    /// 3. Context Analysis
+    /// A) Navigate To Analysis
+    else if (configuration is AnalysisRoutePath) {
+      _navigationCubit.toAnalysis();
+    }
+
+    /// 4. Context Detection
+    /// A) Navigate To Detection
+    /// B) Create Device
+    else if (configuration is DetectionRoutePath) {
+      if (configuration is! DetectionCreationRoutePath) {
+        _navigationCubit.toDetection();
+      } else {
+        _navigationCubit.createDevice();
+      }
+    }
   }
 
   @override

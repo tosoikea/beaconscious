@@ -1,5 +1,6 @@
 import 'package:beaconscious/blocs/detection/detection_cubit.dart';
 import 'package:beaconscious/blocs/detection/detection_state.dart';
+import 'package:beaconscious/constants.dart';
 import 'package:beaconscious/pages/beaconscious_page.dart';
 import 'package:beaconscious/utils/detector_icon_visitor.dart';
 import 'package:beaconscious/widgets/cards/custom_card.dart';
@@ -48,8 +49,8 @@ class DetectionPage extends BeaconsciousPage {
                               : AppLocalizations.of(context)!
                                   .detection_currently_not_detected,
                           subtitleColor: (isCurrent)
-                              ? Theme.of(context).colorScheme.primary
-                              : Theme.of(context).colorScheme.error,
+                              ? Constants.primary50
+                              : Theme.of(context).colorScheme.tertiary,
                           action: const IconButton(
                             onPressed: null,
                             icon: Icon(size: 24, Icons.arrow_drop_down_rounded),

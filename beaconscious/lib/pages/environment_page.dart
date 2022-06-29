@@ -1,6 +1,6 @@
 import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/pages/beaconscious_page.dart';
-import 'package:beaconscious/widgets/cards/custom_card.dart';
+import 'package:beaconscious/widgets/environment_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,26 +30,15 @@ class EnvironmentPage extends BeaconsciousPage {
               child: BlocBuilder<EnvironmentsCubit, EnvironmentsState>(
                 builder: (context, state) => SingleChildScrollView(
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: state.environments.map((e) {
                       bool isCurrent = state.current.name == e.name;
 
                       return Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: CustomCard(
-                          leading: e.icon, title: e.name,
-                          //TODO : Determine the actual day (e.g. gestern, etc.)
-                          subtitle: (isCurrent)
-                              ? AppLocalizations.of(context)!
-                                  .environments_currently_active
-                              : AppLocalizations.of(context)!
-                                  .environments_previously_active("heute"),
-                          subtitleColor: (isCurrent)
-                              ? Theme.of(context).colorScheme.primary
-                              : null,
-                          action: const IconButton(
-                            onPressed: null,
-                            icon: Icon(size: 24, Icons.arrow_drop_down_rounded),
-                          ),
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: EnvironmentWidget(
+                          environment: e,
+                          active: isCurrent,
                         ),
                       );
                     }).toList(growable: false),

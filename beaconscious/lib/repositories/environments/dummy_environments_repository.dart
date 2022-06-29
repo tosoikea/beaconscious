@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:beaconscious/constants.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,9 @@ class DummyEnvironmentsRepository extends EnvironmentsRepository {
           "location-001"
         ],
         what: <Rule>[
-          DoNotDisturbRule()
+          DoNotDisturbRule(),
+          const DisabledAppNotificationsRule(
+              applications: [Constants.whatsapp, Constants.instagram])
         ],
         when: const <TimeRange>[
           TimeRange(
@@ -76,7 +79,7 @@ class DummyEnvironmentsRepository extends EnvironmentsRepository {
 
   @override
   Future<bool> removeEnvironment({required String environmentId}) {
-    if (_environments.containsKey(environmentId)) {
+    if (!_environments.containsKey(environmentId)) {
       return Future.value(false);
     }
 
@@ -88,7 +91,7 @@ class DummyEnvironmentsRepository extends EnvironmentsRepository {
   @override
   Future<bool> updateEnvironment(
       {required String environmentId, required Environment environment}) {
-    if (_environments.containsKey(environment.name)) {
+    if (!_environments.containsKey(environment.name)) {
       return Future.value(false);
     }
 

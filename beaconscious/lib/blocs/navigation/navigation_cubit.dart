@@ -37,12 +37,9 @@ class NavigationCubit extends Cubit<AppNavigationState> {
 
   /// 2. Context Environment
   /// A) Navigate To Environments
-  /// B) Inspect Environment
-  /// C) Create Environment
+  /// B) Create Environment
   void toEnvironments() =>
       _navigateToGet(context: AppNavigationContext.environment);
-  void toEnvironment({required String environmentId}) => _navigateToGet(
-      context: AppNavigationContext.environment, environmentId: environmentId);
   void createEnvironment() => _navigateToCreate(
       context: AppNavigationContext.environment, creatingEnvironment: true);
 

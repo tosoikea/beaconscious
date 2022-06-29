@@ -32,7 +32,9 @@ class DummyDetectionRepository extends DetectionRepository {
         longitude: -108.13503);
 
     // TODO : Proper "device etc. detection"
-    _detectedController.add(_detectors.values.toList(growable: false));
+    _detectedController.add(_detectors.values
+        .where((element) => element.id != "device-002")
+        .toList(growable: false));
     _updateDetectors();
   }
 
