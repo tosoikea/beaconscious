@@ -1,0 +1,72 @@
+{
+  "and": "und",
+  "environment_card_title" : "Aktuelle Umgebung",
+  "detection_card_title" : "Erkennung",
+  "detection_card_caption_title" : "In der Nähe von",
+  "detection_close_device_singular" : "einem Gerät",
+  "detection_close_location_singular" : "einem Ort",
+  "detection_close_device_plural" : "{amount} Geräten",
+  "@detection_close_device_plural": {
+    "placeholders": {
+      "amount" : {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "detection_close_location_plural" : "{amount} Orten",
+  "@detection_close_location_plural": {
+    "placeholders": {
+      "amount" : {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "analysis_card_title" : "Wochenübersicht",
+  "analysis_card_caption_title" : "Heute",
+  "analysis_card_caption_hour" : "eine Stunde",
+  "analysis_card_caption_hours" : "{amount} Stunden",
+  "@analysis_card_caption_hours": {
+    "placeholders": {
+      "amount" : {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "analysis_card_caption_minute" : "eine Minute",
+  "analysis_card_caption_minutes" : "{amount} Minuten",
+  "@analysis_card_caption_minutes": {
+    "placeholders": {
+      "amount" : {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "analysis_card_caption_environment" : "in der Umgebung {environment}",
+  "@analysis_card_caption_environment": {
+    "placeholders": {
+      "environment" : {
+        "type": "String",
+        "example": "Home Office"
+      }
+    }
+  },
+  "environments_title": "Umgebungen",
+  "environments_currently_active": "Aktuell aktiv",
+  "environments_previously_active": "Zuletzt {day} aktiv",
+  "@environments_previously_active": {
+    "placeholders": {
+      "day" : {
+        "type": "String",
+        "example": "heute"
+      }
+    }
+  },
+  "detection_title": "Erkennung",
+  "detection_currently_detected": "Erkannt",
+  "detection_currently_not_detected": "Nicht Erkannt",
+  "analysis_title": "Übersicht"
+}
