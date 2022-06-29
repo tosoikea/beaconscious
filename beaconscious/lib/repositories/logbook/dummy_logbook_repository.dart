@@ -35,6 +35,37 @@ class DummyLogbookRepository extends LogbookRepository {
           date: Date(year: 2022, month: 6, day: 29),
           seconds: 2 * 60 * 60 + 18 * 60),
     ];
+
+    _entries["Schlafen"] = [
+      const LogbookEntry(
+          environmentId: "Schlafen",
+          date: Date(year: 2022, month: 6, day: 23),
+          seconds: 8 * 60 * 60),
+      const LogbookEntry(
+          environmentId: "Schlafen",
+          date: Date(year: 2022, month: 6, day: 24),
+          seconds: 8 * 60 * 60),
+      const LogbookEntry(
+          environmentId: "Schlafen",
+          date: Date(year: 2022, month: 6, day: 25),
+          seconds: 8 * 60 * 60),
+      const LogbookEntry(
+          environmentId: "Schlafen",
+          date: Date(year: 2022, month: 6, day: 26),
+          seconds: 8 * 60 * 60),
+      const LogbookEntry(
+          environmentId: "Schlafen",
+          date: Date(year: 2022, month: 6, day: 27),
+          seconds: 8 * 60 * 60),
+      const LogbookEntry(
+          environmentId: "Schlafen",
+          date: Date(year: 2022, month: 6, day: 28),
+          seconds: 8 * 60 * 60),
+      const LogbookEntry(
+          environmentId: "Schlafen",
+          date: Date(year: 2022, month: 6, day: 29),
+          seconds: 8 * 60 * 60),
+    ];
   }
 
   @override

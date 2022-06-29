@@ -9,8 +9,8 @@ class HomePage extends BeaconsciousPage {
 
   @override
   Widget get child => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Column(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
           children: const [
             CurrentEnvironmentWidget(),
             Padding(
@@ -23,5 +23,5 @@ class HomePage extends BeaconsciousPage {
             )
           ],
         ),
-  );
+      );
 }

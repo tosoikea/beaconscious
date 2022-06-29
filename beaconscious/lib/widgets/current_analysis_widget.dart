@@ -21,6 +21,8 @@ class CurrentAnalysisWidget extends StatelessWidget {
                 ? aState.currentDay[state.current.name]!.seconds
                 : 0;
 
+            print(aState.currentDay);
+
             int hours = seconds ~/ 3600;
             int minutes = (seconds - (hours * 3600)) ~/ 60;
 

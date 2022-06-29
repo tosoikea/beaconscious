@@ -1,5 +1,8 @@
 {
   "and": "und",
+  "day": "Tag",
+  "week": "Woche",
+  "month": "Monat",
   "environment_card_title" : "Aktuelle Umgebung",
   "detection_card_title" : "Erkennung",
   "detection_card_caption_title" : "In der Nähe von",

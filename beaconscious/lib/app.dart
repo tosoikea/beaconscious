@@ -21,7 +21,7 @@ class BeaconsciousApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MultiRepositoryProvider(
-      providers: [
+          providers: [
             RepositoryProvider<DetectionRepository>(
                 create: (_) => DummyDetectionRepository()),
             RepositoryProvider<EnvironmentsRepository>(
@@ -29,7 +29,7 @@ class BeaconsciousApp extends StatelessWidget {
             RepositoryProvider<LogbookRepository>(
                 create: (_) => DummyLogbookRepository()),
           ],
-      child: MultiBlocProvider(providers: [
+          child: MultiBlocProvider(providers: [
             BlocProvider(
               lazy: false,
               create: (_) => NavigationCubit(),
@@ -64,15 +64,19 @@ class _BeaconsciousAppInternal extends StatelessWidget {
       title: "BeaConscious",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          textTheme: const TextTheme(
+              bodyMedium: TextStyle(fontFamily: 'Oxygen', fontSize: 14),
+              bodySmall: TextStyle(fontFamily: 'Oxygen', fontSize: 12),
+              bodyLarge: TextStyle(fontFamily: 'Oxygen', fontSize: 16)),
           appBarTheme: const AppBarTheme(
-            // SURFACE
+              // SURFACE
               titleTextStyle: TextStyle(
-                // ON SURFACE
-                color: Color(0xFF1B1B1F),
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Oxygen',
-              )),
+            // ON SURFACE
+            color: Color(0xFF1B1B1F),
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Oxygen',
+          )),
           useMaterial3: true,
           colorScheme: const ColorScheme(
               brightness: Brightness.light,

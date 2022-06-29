@@ -46,6 +46,9 @@ dependencies:
   # Date formatting
   intl: ^0.17.0
 
+  # Analysis Doughnut diagram
+  syncfusion_flutter_charts: ^20.1.61
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -75,3 +78,6 @@ flutter:
           weight: 300
         - asset: assets/fonts/Oxygen/Oxygen-Bold.ttf
           weight: 700
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf
