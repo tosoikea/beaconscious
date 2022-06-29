@@ -4,6 +4,7 @@ import 'package:beaconscious/constants.dart';
 import 'package:beaconscious/pages/beaconscious_page.dart';
 import 'package:beaconscious/utils/detector_icon_visitor.dart';
 import 'package:beaconscious/widgets/cards/custom_card.dart';
+import 'package:beaconscious/widgets/detector_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,22 +40,9 @@ class DetectionPage extends BeaconsciousPage {
 
                       return Padding(
                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: CustomCard(
-                          leading: e.accept(DetectorIconVisitor(), context),
-                          title: e.name,
-                          //TODO : Determine the actual day (e.g. gestern, etc.)
-                          subtitle: (isCurrent)
-                              ? AppLocalizations.of(context)!
-                                  .detection_currently_detected
-                              : AppLocalizations.of(context)!
-                                  .detection_currently_not_detected,
-                          subtitleColor: (isCurrent)
-                              ? Constants.primary50
-                              : Theme.of(context).colorScheme.tertiary,
-                          action: const IconButton(
-                            onPressed: null,
-                            icon: Icon(size: 24, Icons.arrow_drop_down_rounded),
-                          ),
+                        child: DetectorWidget(
+                          active: isCurrent,
+                          detector: e,
                         ),
                       );
                     }).toList(growable: false),

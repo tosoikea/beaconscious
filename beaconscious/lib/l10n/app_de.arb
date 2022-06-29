@@ -23,9 +23,6 @@
       }
     }
   },
-  "detection_rule_do_not_disturb": "Nicht-Stören-Modus",
-  "detection_rule_do_not_disturb_description": "Lautlose Benachrichtigungen",
-  "detection_rule_no_app_notification": "Keine App-Benachrichtigungen",
   "analysis_card_title": "Wochenübersicht",
   "analysis_card_caption_title": "Heute",
   "analysis_card_caption_hour": "eine Stunde",
@@ -71,8 +68,22 @@
   "environments_where": "Wo?",
   "environments_when": "Wann?",
   "environments_what": "Was?",
+  "environments_rule_do_not_disturb": "Nicht-Stören-Modus",
+  "environments_rule_do_not_disturb_description": "Lautlose Benachrichtigungen",
+  "environments_rule_no_app_notification": "Keine App-Benachrichtigungen",
   "detection_title": "Erkennung",
   "detection_currently_detected": "Erkannt",
   "detection_currently_not_detected": "Nicht Erkannt",
+  "detection_device_bluetooth_name": "Bluetooth-Name",
+  "detection_device_bluetooth_strength": "Signalstärke",
+  "detection_detector_created_at": "hinzugefügt am {date}",
+  "@detection_detector_created_at": {
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "12.06.2022"
+      }
+    }
+  },
   "analysis_title": "Übersicht"
 }

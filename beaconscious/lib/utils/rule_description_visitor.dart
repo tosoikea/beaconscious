@@ -6,7 +6,7 @@ class RuleDescriptionVisitor extends RuleVisitor<BuildContext, Widget> {
   @override
   Widget visitDoNotDisturbRule(DoNotDisturbRule rule, BuildContext state) =>
       Text(
-          AppLocalizations.of(state)!.detection_rule_do_not_disturb_description,
+          AppLocalizations.of(state)!.environments_rule_do_not_disturb_description,
           style: Theme.of(state).textTheme.bodyMedium);
 
   @override

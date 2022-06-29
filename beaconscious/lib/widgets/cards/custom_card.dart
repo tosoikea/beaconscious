@@ -34,7 +34,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Card(
-    color: backgroundColor ?? Theme.of(context).colorScheme.surfaceVariant,
+        color: backgroundColor ?? Theme.of(context).colorScheme.surfaceVariant,
         child: InkWell(
           borderRadius: BorderRadius.circular(12.0),
           onTap: onTap,
@@ -56,36 +56,36 @@ class CustomCard extends StatelessWidget {
                             backgroundColor:
                                 Theme.of(context).colorScheme.primary,
                             radius: 20,
-                        child: Icon(
-                          leading,
-                          color: Theme.of(context).colorScheme.onPrimary,
-                          size: 32,
+                            child: Icon(
+                              leading,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              size: 32,
+                            ),
+                          ),
                         ),
-                      ),
+                        CardTitle(
+                          title: title,
+                          subtitle: subtitle,
+                          titleColor: titleColor,
+                          subtitleColor: subtitleColor,
+                        ),
+                        const Spacer(),
+                        if (action != null) action!
+                      ],
                     ),
-                    CardTitle(
-                      title: title,
-                      subtitle: subtitle,
-                      titleColor: titleColor,
-                      subtitleColor: subtitleColor,
-                    ),
-                    const Spacer(),
-                    if (action != null) action!
+                    if (content != null) ...[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: content!,
+                      )
+                    ],
+                    if (caption != null) ...[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: caption!,
+                      )
+                    ]
                   ],
-                ),
-                if (content != null) ...[
-                  Container(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    child: content,
-                  )
-                ],
-                if (caption != null) ...[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: caption!,
-                  )
-                ]
-              ],
                 ),
               )),
         ),

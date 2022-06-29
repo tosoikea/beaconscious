@@ -43,6 +43,9 @@ dependencies:
   # Central library for separating concerns within the app (UI, Business Logic, State ...)
   flutter_bloc: ^8.0.1
 
+  # Date formatting
+  intl: ^0.17.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
