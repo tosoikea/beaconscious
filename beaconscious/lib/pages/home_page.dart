@@ -10,18 +10,20 @@ class HomePage extends BeaconsciousPage {
   @override
   Widget get child => Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: const [
-            CurrentEnvironmentWidget(),
-            Padding(
-              padding: EdgeInsets.only(top: 16.0),
-              child: CurrentAnalysisWidget(),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 16.0),
-              child: CurrentDetectionWidget(),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              CurrentEnvironmentWidget(),
+              Padding(
+                padding: EdgeInsets.only(top: 16.0),
+                child: CurrentAnalysisWidget(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16.0),
+                child: CurrentDetectionWidget(),
+              )
+            ],
+          ),
         ),
       );
 }

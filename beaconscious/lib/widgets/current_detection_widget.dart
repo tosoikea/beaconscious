@@ -5,6 +5,7 @@ import 'package:beaconscious/blocs/navigation/navigation.dart';
 import 'package:beaconscious/repositories/detection/models/device.dart';
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/widgets/cards/card_title.dart';
+import 'package:beaconscious/widgets/current_detection_view_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,10 @@ class CurrentDetectionWidget extends StatelessWidget {
         return CustomCard(
             leading: Icons.bluetooth,
             title: AppLocalizations.of(context)!.detection_card_title,
+            content: Container(
+                height: 160,
+                color: Theme.of(context).colorScheme.onPrimary,
+                child: CurrentDetectionViewWidget()),
             caption: CardTitle(
               title: AppLocalizations.of(context)!.detection_card_caption_title,
               subtitle:
