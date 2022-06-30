@@ -2,13 +2,13 @@ import 'package:beaconscious/repositories/detection/models/detector.dart';
 import 'package:beaconscious/repositories/detection/models/detector_visitor.dart';
 
 class Device extends Detector {
-  final String address;
+  final String bluetoothName;
 
   const Device({
     required String id,
     required String name,
     required DateTime creationDate,
-    required this.address,
+    required this.bluetoothName,
   }) : super(id: id, name: name, creationDate: creationDate);
 
   @override
@@ -24,15 +24,15 @@ class Device extends Detector {
           id: id ?? this.id,
           name: name ?? this.name,
           creationDate: creationDate ?? this.creationDate,
-          address: address ?? this.address);
+          bluetoothName: address ?? this.bluetoothName);
 
   @override
-  List<Object?> get props => super.props..addAll([address]);
+  List<Object?> get props => super.props..addAll([bluetoothName]);
 
   static final empty = Device(
       id: "",
       name: "",
-      address: "",
+      bluetoothName: "",
       creationDate: DateTime.fromMillisecondsSinceEpoch(0));
 
   bool get isEmpty => this == Device.empty;

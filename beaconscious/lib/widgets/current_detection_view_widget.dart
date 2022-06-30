@@ -11,6 +11,11 @@ class CurrentDetectionViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<DetectionCubit, DetectionState>(builder: (context, state) {
+        if (state.detected.isEmpty){
+          return Container();
+        }
+
+
         final graph = Graph()..isTree = true;
         // TODO : Prevent collision, even though unlikely
         final userNode = Node.Id("user");

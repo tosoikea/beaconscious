@@ -22,7 +22,7 @@ class DetectorDescriptionVisitor extends DetectorVisitor<BuildContext, Widget> {
                     style: Theme.of(state).textTheme.subtitle2!.copyWith(
                         color: Theme.of(state).colorScheme.onSurfaceVariant),
                   ),
-                  Text("TODO")
+                  Text(device.bluetoothName)
                 ],
               ),
             ),

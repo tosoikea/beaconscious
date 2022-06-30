@@ -1,4 +1,6 @@
 {
+  "cancel": "Abbrechen",
+  "ok": "OK",
   "and": "und",
   "day": "Tag",
   "week": "Woche",
@@ -94,8 +96,6 @@
   "detection_device_bluetooth_name": "Bluetooth-Name",
   "detection_device_bluetooth_strength": "Signalstärke",
   "detection_detector_created_at": "hinzugefügt am {date}",
-  "detection_device" : "Gerät",
-  "detection_location" : "Ort",
   "@detection_detector_created_at": {
     "placeholders": {
       "date": {
@@ -104,5 +104,12 @@
       }
     }
   },
+  "detection_device" : "Gerät",
+  "detection_location" : "Ort",
+  "detection_selection_title" : "Auswahl",
+  "detection_selection_type": "Bitte wähle den Erkennungstyp aus, den du hinzufügen möchtest.",
+  "detection_selection_device_selection": "Bitte wähle das Bluetooth-Gerät aus, das du hinzufügen möchtest.",
+  "detection_selection_device_creation_title" : "Neues Bluetooth-Gerät",
+  "detection_selection_device_creation": "Bitte gebe einen Namen für das Bluetooth-Gerät ein.",
   "analysis_title": "Übersicht"
 }

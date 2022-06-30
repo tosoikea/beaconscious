@@ -1,5 +1,7 @@
 import 'package:beaconscious/repositories/detection/models/detector.dart';
 
+import 'models/device.dart';
+
 abstract class DetectionRepository {
   Future<bool> addDetector({required Detector detector});
   Future<bool> removeDetector({required String detectorId});
@@ -9,4 +11,7 @@ abstract class DetectionRepository {
 
   /// Returns a stream that updates with the detected things.
   Stream<List<Detector>> streamDetected();
+
+  /// Detect all close by (bluetooth) devices
+  Future<List<Device>> getDevices();
 }

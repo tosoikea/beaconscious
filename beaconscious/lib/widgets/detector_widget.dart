@@ -52,7 +52,10 @@ class _DetectorWidgetState extends State<DetectorWidget> {
         subtitleColor: (widget.active)
             ? Constants.primary50
             : Theme.of(context).colorScheme.tertiary,
-        content: widget.detector.accept(DetectorDescriptionVisitor(), context),
+        content: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child:
+                widget.detector.accept(DetectorDescriptionVisitor(), context)),
         caption: Text(AppLocalizations.of(context)!
             .detection_detector_created_at(
                 DateFormat.yMMMd().format(widget.detector.creationDate))),

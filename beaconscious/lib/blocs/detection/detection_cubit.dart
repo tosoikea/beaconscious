@@ -24,6 +24,12 @@ class DetectionCubit extends Cubit<DetectionState> {
     emit(state.copyWith(detectors: detectors));
   }
 
+  /// Loads the currently addable devices.
+  Future<void> load() async {
+    final devices = await _repository.getDevices();
+    emit(state.copyWith(addable: devices));
+  }
+
   @override
   Future<void> close() {
     _detectionSubscription.cancel();

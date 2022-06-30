@@ -13,6 +13,12 @@ class EnvironmentPage extends BeaconsciousPage {
   Widget get child => Builder(builder: (context) {
         return Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                print("Pressed");
+              },
+              child: const Icon(Icons.add),
+            ),
             appBar: AppBar(
               title: Text(
                 AppLocalizations.of(context)!.environments_title,

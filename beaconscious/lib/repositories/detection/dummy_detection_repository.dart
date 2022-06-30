@@ -16,13 +16,13 @@ class DummyDetectionRepository extends DetectionRepository {
         id: "device-001",
         name: "Arbeitslaptop",
         creationDate: DateTime.now(),
-        address: "aa:bb:cc:dd");
+        bluetoothName: "SN87960");
 
     _detectors["device-002"] = Device(
         id: "device-002",
         name: "Schlafzimmer",
         creationDate: DateTime.now(),
-        address: "bb:cc:dd:ee");
+        bluetoothName: "Beacon - Schlafzimmer");
 
     _detectors["location-001"] = Location(
         id: "location-001",
@@ -69,6 +69,31 @@ class DummyDetectionRepository extends DetectionRepository {
 
   @override
   Stream<List<Detector>> streamDetectors() => _knownController.stream;
+
+  @override
+  Future<List<Device>> getDevices() {
+    var base = <Device>[
+      Device(
+          id: "device-004",
+          name: "Beacon - Küche",
+          creationDate: DateTime.now(),
+          bluetoothName: "Beacon - Küche"),
+      Device(
+          id: "device-005",
+          name: "Beacon - Wohnzimmer",
+          creationDate: DateTime.now(),
+          bluetoothName: "Beacon - Wohnzimmer"),
+      Device(
+          id: "device-006",
+          name: "AppleTV-684030",
+          creationDate: DateTime.now(),
+          bluetoothName: "AppleTV-684030"),
+    ];
+
+    return Future.value(base
+        .where((element) => !_detectors.containsKey(element.id))
+        .toList(growable: false));
+  }
 
   void dispose() {
     _detectedController.close();
