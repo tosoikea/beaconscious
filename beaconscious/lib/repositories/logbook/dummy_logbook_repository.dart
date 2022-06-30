@@ -5,66 +5,59 @@ class DummyLogbookRepository extends LogbookRepository {
   final Map<String, List<LogbookEntry>> _entries;
 
   DummyLogbookRepository() : _entries = <String, List<LogbookEntry>>{} {
+    var days = [
+      Date.fromDateTime(DateTime.now().subtract(Duration(days: 6))),
+      Date.fromDateTime(DateTime.now().subtract(Duration(days: 5))),
+      Date.fromDateTime(DateTime.now().subtract(Duration(days: 4))),
+      Date.fromDateTime(DateTime.now().subtract(Duration(days: 3))),
+      Date.fromDateTime(DateTime.now().subtract(Duration(days: 2))),
+      Date.fromDateTime(DateTime.now().subtract(Duration(days: 1))),
+      Date.fromDateTime(DateTime.now())
+    ];
+
     _entries["Home Office"] = [
-      const LogbookEntry(
+      LogbookEntry(
           environmentId: "Home Office",
-          date: Date(year: 2022, month: 6, day: 23),
+          date: days[0],
           seconds: 8 * 60 * 60 + 12 * 60),
-      const LogbookEntry(
+      LogbookEntry(
           environmentId: "Home Office",
-          date: Date(year: 2022, month: 6, day: 24),
+          date: days[1],
           seconds: 7 * 60 * 60 + 15 * 60),
-      const LogbookEntry(
+      LogbookEntry(
           environmentId: "Home Office",
-          date: Date(year: 2022, month: 6, day: 25),
+          date: days[2],
           seconds: 5 * 60 * 60 + 20 * 60),
-      const LogbookEntry(
+      LogbookEntry(
           environmentId: "Home Office",
-          date: Date(year: 2022, month: 6, day: 26),
+          date: days[3],
           seconds: 1 * 60 * 60 + 11 * 60),
-      const LogbookEntry(
+      LogbookEntry(environmentId: "Home Office", date: days[4], seconds: 0),
+      LogbookEntry(
           environmentId: "Home Office",
-          date: Date(year: 2022, month: 6, day: 27),
-          seconds: 0),
-      const LogbookEntry(
-          environmentId: "Home Office",
-          date: Date(year: 2022, month: 6, day: 28),
+          date: days[5],
           seconds: 9 * 60 * 60 + 12 * 60),
-      const LogbookEntry(
+      LogbookEntry(
           environmentId: "Home Office",
-          date: Date(year: 2022, month: 6, day: 29),
+          date: days[6],
           seconds: 2 * 60 * 60 + 18 * 60),
     ];
 
     _entries["Schlafen"] = [
-      const LogbookEntry(
-          environmentId: "Schlafen",
-          date: Date(year: 2022, month: 6, day: 23),
-          seconds: 8 * 60 * 60),
-      const LogbookEntry(
-          environmentId: "Schlafen",
-          date: Date(year: 2022, month: 6, day: 24),
-          seconds: 8 * 60 * 60),
-      const LogbookEntry(
-          environmentId: "Schlafen",
-          date: Date(year: 2022, month: 6, day: 25),
-          seconds: 8 * 60 * 60),
-      const LogbookEntry(
-          environmentId: "Schlafen",
-          date: Date(year: 2022, month: 6, day: 26),
-          seconds: 8 * 60 * 60),
-      const LogbookEntry(
-          environmentId: "Schlafen",
-          date: Date(year: 2022, month: 6, day: 27),
-          seconds: 8 * 60 * 60),
-      const LogbookEntry(
-          environmentId: "Schlafen",
-          date: Date(year: 2022, month: 6, day: 28),
-          seconds: 8 * 60 * 60),
-      const LogbookEntry(
-          environmentId: "Schlafen",
-          date: Date(year: 2022, month: 6, day: 29),
-          seconds: 8 * 60 * 60),
+      LogbookEntry(
+          environmentId: "Schlafen", date: days[0], seconds: 8 * 60 * 60),
+      LogbookEntry(
+          environmentId: "Schlafen", date: days[1], seconds: 8 * 60 * 60),
+      LogbookEntry(
+          environmentId: "Schlafen", date: days[2], seconds: 8 * 60 * 60),
+      LogbookEntry(
+          environmentId: "Schlafen", date: days[3], seconds: 8 * 60 * 60),
+      LogbookEntry(
+          environmentId: "Schlafen", date: days[4], seconds: 8 * 60 * 60),
+      LogbookEntry(
+          environmentId: "Schlafen", date: days[5], seconds: 8 * 60 * 60),
+      LogbookEntry(
+          environmentId: "Schlafen", date: days[6], seconds: 8 * 60 * 60),
     ];
   }
 

@@ -2,6 +2,7 @@ import 'package:beaconscious/blocs/analysis/analysis.dart';
 import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/blocs/navigation/navigation.dart';
 import 'package:beaconscious/widgets/cards/card_title.dart';
+import 'package:beaconscious/widgets/current_analysis_week_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,14 +22,17 @@ class CurrentAnalysisWidget extends StatelessWidget {
                 ? aState.currentDay[state.current.name]!.seconds
                 : 0;
 
-            print(aState.currentDay);
-
             int hours = seconds ~/ 3600;
             int minutes = (seconds - (hours * 3600)) ~/ 60;
 
             return CustomCard(
               leading: Icons.bar_chart,
               title: AppLocalizations.of(context)!.analysis_card_title,
+              content: Container(
+                  width: double.infinity,
+                  height: 160,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  child: CurrentAnalysisWeekWidget(environment: state.current)),
               caption: CardTitle(
                   title:
                       AppLocalizations.of(context)!.analysis_card_caption_title,

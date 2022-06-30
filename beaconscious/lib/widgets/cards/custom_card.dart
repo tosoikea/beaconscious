@@ -41,7 +41,7 @@ class CustomCard extends StatelessWidget {
           child: Container(
               constraints: const BoxConstraints(minHeight: 80),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -51,7 +51,7 @@ class CustomCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: CircleAvatar(
                             backgroundColor:
                                 Theme.of(context).colorScheme.primary,
@@ -81,7 +81,7 @@ class CustomCard extends StatelessWidget {
                     ],
                     if (caption != null) ...[
                       Padding(
-                        padding: const EdgeInsets.only(top: 16.0),
+                        padding: const EdgeInsets.only(left: 16.0, top: 16.0),
                         child: caption!,
                       )
                     ]

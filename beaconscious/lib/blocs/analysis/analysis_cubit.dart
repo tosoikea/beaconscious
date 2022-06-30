@@ -32,7 +32,7 @@ class AnalysisCubit extends Cubit<AnalysisState> {
 
     // 1. This week : Last 7 Days (incl. today)
     var currentWeek = <String, List<LogbookEntry>>{};
-    final start = DateTime.now().subtract(const Duration(days: 6));
+    final start = DateTime.now().subtract(const Duration(days: 7));
 
     for (var entry in stored.entries) {
       var environmentId = entry.key;
