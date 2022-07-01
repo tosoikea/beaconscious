@@ -108,6 +108,6 @@
   "detection_selection_device_creation": "Bitte gebe einen Namen für das Bluetooth-Gerät ein.",
   "analysis_title": "Übersicht",
   "info_environment": "Eine Umgebung setzt sich aus dem Wo und Wann zusammen. Das Wo gibst du durch die Geräte oder Orte an, bei denen du dich befindest. Beim Wann gibst du Start- und Endzeiten für die Umgebung an. Zusätzlich kannst du Effekte definieren, die automatisch ausgelöst werden, sobald die Umgebung aktiv ist.",
-  "info_detection": "Du kannst Umgebungen abhängig davon festlegen wo du dich befindest. Das Wo können hierbei Geräte oder Orte sein. Ein Bluetooth Beacon ist ein spezielles Gerät, dessen primäre Aufgabe der Versand von Signalen ist. Umgebungen werden dann beispielsweise erkannt, wenn du dich in der Nähe dieser Geräte oder Orte befindest. Hierfür müssen die zu erkennenden Geräte oder Orte von dir in der Anwendung hinterlegt werden.",
+  "info_detection": "Du kannst Umgebungen abhängig davon festlegen wo du dich befindest. Das Wo können hierbei Geräte oder Orte sein. Umgebungen werden dann beispielsweise erkannt, wenn du dich in der Nähe dieser Geräte oder Orte befindest. Hierfür müssen die zu erkennenden Geräte oder Orte von dir in der Anwendung hinterlegt werden.",
   "info_analysis": " In der Übersicht kannst du dir anzeigen lassen, wie sich deine Zeit in den einzelnen Umgebungen verändert hat. Hierfür kannst du zwischen einer Tages-, Wochen- und Monatsübersicht wechseln."
 }
