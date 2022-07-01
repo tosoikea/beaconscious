@@ -2,6 +2,7 @@ import 'package:beaconscious/custom_icons.dart';
 import 'package:beaconscious/pages/beaconscious_page.dart';
 import 'package:beaconscious/widgets/analysis_diagram_widget.dart';
 import 'package:beaconscious/widgets/analysis_remarks_widget.dart';
+import 'package:beaconscious/widgets/dialogs/info_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -88,7 +89,13 @@ class _AnalysisPageWidgetState extends State<_AnalysisPageWidget>
         ),
         actions: [
           IconButton(
-              onPressed: null,
+              onPressed: () async => await showDialog(
+                  context: context,
+                  builder: (BuildContext context) => InfoDialog(
+                      title: AppLocalizations.of(context)!
+                          .analysis_title,
+                      description: AppLocalizations.of(context)!
+                          .info_analysis)),
               icon: Icon(
                   color: Theme.of(context).primaryColor, Icons.info_outlined))
         ],

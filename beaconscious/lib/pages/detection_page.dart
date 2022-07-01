@@ -1,7 +1,9 @@
 import 'package:beaconscious/blocs/detection/detection.dart';
 import 'package:beaconscious/pages/beaconscious_page.dart';
 import 'package:beaconscious/widgets/detection_screen_widget.dart';
+import 'package:beaconscious/widgets/dialogs/custom_dialog.dart';
 import 'package:beaconscious/widgets/dialogs/detection_addition_dialog.dart';
+import 'package:beaconscious/widgets/dialogs/info_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +32,13 @@ class DetectionPage extends BeaconsciousPage {
               ),
               actions: [
                 IconButton(
-                    onPressed: null,
+                    onPressed: () async => await showDialog(
+                        context: context,
+                        builder: (BuildContext context) => InfoDialog(
+                            title:
+                                AppLocalizations.of(context)!.detection_title,
+                            description:
+                                AppLocalizations.of(context)!.info_detection)),
                     icon: Icon(
                         color: Theme.of(context).primaryColor,
                         Icons.info_outlined))
