@@ -59,16 +59,26 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                                   children: [
                                     SizedBox(
                                       width: 32,
-                                      child: CircleAvatar(
-                                        maxRadius: 16,
-                                        child: Text(CustomDateUtils
-                                            .getWeekDayShortNameByNumber(
-                                                context, e.weekDay)),
+                                      child: Center(
+                                        child: Text(
+                                          CustomDateUtils
+                                              .getWeekDayShortNameByNumber(
+                                                  context, e.weekDay),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge!
+                                              .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurfaceVariant,
+                                              ),
+                                        ),
                                       ),
                                     ),
                                     Expanded(
                                         child: Padding(
-                                      padding: const EdgeInsets.only(left: 16.0),
+                                      padding:
+                                          const EdgeInsets.only(left: 16.0),
                                       child: TimeRangesWidget(ranges: e.ranges),
                                     )),
                                   ],
