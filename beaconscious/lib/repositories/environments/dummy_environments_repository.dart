@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:beaconscious/constants.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
+import 'package:beaconscious/repositories/environments/models/day_time_window.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
 import 'package:beaconscious/repositories/environments/models/rules/restricted_app_usage_rule.dart';
 import 'package:flutter/material.dart';
@@ -18,49 +19,45 @@ class DummyEnvironmentsRepository extends EnvironmentsRepository {
     _environments["Home Office"] = Environment(
         icon: Icons.business_center,
         name: "Home Office",
-        where: const <String>[
-          "device-001",
-          "location-001"
-        ],
+        where: const <String>["device-001", "location-001"],
         what: <Rule>[
           DoNotDisturbRule(),
-          const RestrictedAppUsageRule(applications: <String>[
-            Constants.tiktok,
-            Constants.twitch
-          ])
+          const RestrictedAppUsageRule(
+              applications: <String>[Constants.tiktok, Constants.twitch])
         ],
-        when: const <TimeRange>[
-          TimeRange(
-              start: TimeOfDay(hour: 7, minute: 0),
-              end: TimeOfDay(hour: 12, minute: 0)),
-          TimeRange(
-              start: TimeOfDay(hour: 14, minute: 0),
-              end: TimeOfDay(hour: 16, minute: 0))
-        ]);
+        when: List.generate(
+            7,
+            (index) => DayTimeWindow(weekDay: index + 1, ranges: [
+                  TimeRange(
+                      start: const TimeOfDay(hour: 7, minute: 0),
+                      end: const TimeOfDay(hour: 12, minute: 0)),
+                  TimeRange(
+                      start: const TimeOfDay(hour: 14, minute: 0),
+                      end: const TimeOfDay(hour: 16, minute: 0))
+                ])));
 
     _environments["Schlafen"] = Environment(
         icon: Icons.bedtime,
         name: "Schlafen",
-        where: const <String>[
-          "device-002",
-          "location-001"
-        ],
+        where: const <String>["device-002", "location-001"],
         what: <Rule>[
           DoNotDisturbRule(),
           const DisabledAppNotificationsRule(
               applications: [Constants.whatsapp, Constants.instagram])
         ],
-        when: const <TimeRange>[
-          TimeRange(
-              start: TimeOfDay(hour: 0, minute: 0),
-              end: TimeOfDay(hour: 6, minute: 30)),
-          TimeRange(
-              start: TimeOfDay(hour: 12, minute: 0),
-              end: TimeOfDay(hour: 14, minute: 0)),
-          TimeRange(
-              start: TimeOfDay(hour: 22, minute: 0),
-              end: TimeOfDay(hour: 23, minute: 59))
-        ]);
+        when: List.generate(
+            7,
+            (index) => DayTimeWindow(weekDay: index + 1, ranges: [
+                  TimeRange(
+                      start: const TimeOfDay(hour: 0, minute: 0),
+                      end: const TimeOfDay(hour: 6, minute: 30)),
+                  TimeRange(
+                      start: const TimeOfDay(hour: 12, minute: 0),
+                      end: const TimeOfDay(hour: 14, minute: 0)),
+                  TimeRange(
+                      start: const TimeOfDay(hour: 22, minute: 0),
+                      end: const TimeOfDay(hour: 23, minute: 59))
+                ])));
 
     // TODO : Proper "environment detection"
     _detectedController.add(_environments["Home Office"]!);

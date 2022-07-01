@@ -1,4 +1,5 @@
 import 'package:beaconscious/repositories/detection/models/detector.dart';
+import 'package:beaconscious/repositories/environments/models/day_time_window.dart';
 import 'package:beaconscious/repositories/environments/models/rules/rules.dart';
 import 'package:beaconscious/repositories/environments/models/time_range.dart';
 import 'package:equatable/equatable.dart';
@@ -8,7 +9,7 @@ class Environment extends Equatable {
   final IconData icon;
   final String name;
   final List<String> where;
-  final List<TimeRange> when;
+  final List<DayTimeWindow> when;
   final List<Rule> what;
 
   const Environment(
@@ -27,7 +28,7 @@ class Environment extends Equatable {
   static const empty = Environment(
       icon: Icons.error,
       name: "",
-      when: <TimeRange>[],
+      when: <DayTimeWindow>[],
       where: <String>[],
       what: <Rule>[]);
 

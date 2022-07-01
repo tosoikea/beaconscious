@@ -25,9 +25,7 @@ class CustomDateUtils {
     }
   }
 
-  static String getWeekDayShortName(BuildContext context, DateTime dateTime) {
-    var weekday = dateTime.weekday;
-
+  static String getWeekDayShortNameByNumber(BuildContext context, int weekday) {
     switch (weekday) {
       case 1:
         return AppLocalizations.of(context)!.monday_short;
@@ -47,4 +45,7 @@ class CustomDateUtils {
         throw ArgumentError("$weekday is an unknown weekday.");
     }
   }
+
+  static String getWeekDayShortName(BuildContext context, DateTime dateTime) =>
+      getWeekDayShortNameByNumber(context, dateTime.weekday);
 }

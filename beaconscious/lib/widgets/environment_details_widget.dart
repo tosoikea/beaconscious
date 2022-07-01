@@ -1,7 +1,9 @@
 import 'package:beaconscious/blocs/detection/detection.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
+import 'package:beaconscious/utils/custom_date_utils.dart';
 import 'package:beaconscious/widgets/environment_detector_chip.dart';
 import 'package:beaconscious/widgets/rule_widget.dart';
+import 'package:beaconscious/widgets/time_ranges_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,7 +29,6 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color:
                               Theme.of(context).colorScheme.onSurfaceVariant)),
-                  //TODO
                   Padding(
                     padding:
                         const EdgeInsets.only(top: 10.0, left: 6, right: 6),
@@ -47,6 +48,34 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                             color: Theme.of(context)
                                 .colorScheme
                                 .onSurfaceVariant)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: Column(
+                      children: environment.when
+                          .map((e) => Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 32,
+                                      child: CircleAvatar(
+                                        maxRadius: 16,
+                                        child: Text(CustomDateUtils
+                                            .getWeekDayShortNameByNumber(
+                                                context, e.weekDay)),
+                                      ),
+                                    ),
+                                    Expanded(
+                                        child: Padding(
+                                      padding: const EdgeInsets.only(left: 16.0),
+                                      child: TimeRangesWidget(ranges: e.ranges),
+                                    )),
+                                  ],
+                                ),
+                              ))
+                          .toList(),
+                    ),
                   ),
                   // TODO
                   Padding(
