@@ -44,18 +44,18 @@ class DummyDetectionRepository extends DetectionRepository {
 
   @override
   Future<bool> addDetector({required Detector detector}) {
-    if (_detectors.containsKey(detector.name)) {
+    if (_detectors.containsKey(detector.id)) {
       return Future.value(false);
     }
 
-    _detectors[detector.name] = detector;
+    _detectors[detector.id] = detector;
     _updateDetectors();
     return Future.value(true);
   }
 
   @override
   Future<bool> removeDetector({required String detectorId}) {
-    if (_detectors.containsKey(detectorId)) {
+    if (!_detectors.containsKey(detectorId)) {
       return Future.value(false);
     }
 

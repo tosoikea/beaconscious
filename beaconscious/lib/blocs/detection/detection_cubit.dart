@@ -30,6 +30,18 @@ class DetectionCubit extends Cubit<DetectionState> {
     emit(state.copyWith(addable: devices));
   }
 
+  /// Adds the detector to the known detectors and make it therefore detectable. lol
+  Future<void> addDetector({required Detector detector}) async {
+    await _repository.addDetector(detector: detector);
+  }
+
+  /// Removes the detectors from the detectables
+  Future<void> removeDetector({required Detector detector}) async {
+    // TODO : Add a check, that detector is not included within any environment.
+    // Afterwards the state needs to include information about the succes of the operation etc.
+    await _repository.removeDetector(detectorId: detector.id);
+  }
+
   @override
   Future<void> close() {
     _detectionSubscription.cancel();

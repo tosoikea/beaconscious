@@ -20,7 +20,7 @@ class _DetectionScreenWidget extends State<DetectionScreenWidget> {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<DetectionCubit, DetectionState>(
-        builder: (context, state) => Container(
+        builder: (context, state) => SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,24 +46,26 @@ class _DetectionScreenWidget extends State<DetectionScreenWidget> {
                   )
                 ],
               ),
-              SingleChildScrollView(
-                child: Column(
-                  children: state.detectors
-                      .where((element) =>
-                          (devicesActive && element is Device) ||
-                          (locationsActive && element is Location))
-                      .map((e) {
-                    bool isCurrent =
-                        state.detected.any((element) => element.id == e.id);
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: state.detectors
+                        .where((element) =>
+                            (devicesActive && element is Device) ||
+                            (locationsActive && element is Location))
+                        .map((e) {
+                      bool isCurrent =
+                          state.detected.any((element) => element.id == e.id);
 
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      child: DetectorWidget(
-                        active: isCurrent,
-                        detector: e,
-                      ),
-                    );
-                  }).toList(growable: false),
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                        child: DetectorWidget(
+                          active: isCurrent,
+                          detector: e,
+                        ),
+                      );
+                    }).toList(growable: false),
+                  ),
                 ),
               ),
             ],
