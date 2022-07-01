@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:beaconscious/constants.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
+import 'package:beaconscious/repositories/environments/models/rules/restricted_app_usage_rule.dart';
 import 'package:flutter/material.dart';
 
 class DummyEnvironmentsRepository extends EnvironmentsRepository {
@@ -22,7 +23,11 @@ class DummyEnvironmentsRepository extends EnvironmentsRepository {
           "location-001"
         ],
         what: <Rule>[
-          DoNotDisturbRule()
+          DoNotDisturbRule(),
+          const RestrictedAppUsageRule(applications: <String>[
+            Constants.tiktok,
+            Constants.twitch
+          ])
         ],
         when: const <TimeRange>[
           TimeRange(
