@@ -29,6 +29,7 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
     emit(state.copyWith(environments: environments));
   }
 
+  /// Adds a known detector to the environment.
   Future<void> addDetector(
       {required String environmentId, required String detectorId}) async {
     var current = state.environments.firstWhere(
@@ -51,6 +52,7 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
             where: [...current.where, detectorId]));
   }
 
+  /// Removes a known detector from the environment.
   Future<void> removeDetector(
       {required String environmentId, required String detectorId}) async {
     var current = state.environments.firstWhere(
@@ -74,6 +76,17 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
             when: current.when,
             what: current.what,
             where: updated));
+  }
+
+  /// Add an environment to the list of known and detectable environments.
+  Future<void> addEnvironment({required Environment environment}) async {
+    await _repository.addEnvironment(environment: environment);
+  }
+
+  /// Remove an environment from the list of known and detectable environments.
+  Future<void> removeEnvironment({required Environment environment}) async {
+    // TODO : Afterwards the state needs to include information about the success of the operation etc.
+    await _repository.removeEnvironment(environmentId: environment.name);
   }
 
   @override

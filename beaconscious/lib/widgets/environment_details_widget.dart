@@ -1,6 +1,8 @@
 import 'package:beaconscious/blocs/detection/detection.dart';
+import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
 import 'package:beaconscious/utils/custom_date_utils.dart';
+import 'package:beaconscious/widgets/dialogs/environments_deletion_dialog.dart';
 import 'package:beaconscious/widgets/environment_detector_chip.dart';
 import 'package:beaconscious/widgets/rule_widget.dart';
 import 'package:beaconscious/widgets/time_ranges_widget.dart';
@@ -31,7 +33,7 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                               Theme.of(context).colorScheme.onSurfaceVariant)),
                   Padding(
                     padding:
-                        const EdgeInsets.only(top: 10.0, left: 6, right: 6),
+                        const EdgeInsets.only(top: 10.0, left: 8, right: 8),
                     child: Wrap(
                       spacing: 8.0,
                       runSpacing: 8.0,
@@ -50,7 +52,7 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                                 .onSurfaceVariant)),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
                       children: environment.when
                           .map((e) => Padding(
@@ -105,6 +107,23 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                               ),
                             ))
                         .toList(growable: false),
+                  ),
+                  Row(
+                    children: [
+                      const Spacer(),
+                      MaterialButton(
+                          onPressed: () async => await showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  EnvironmentsDeletionDialog(
+                                      environment: environment)),
+                          child: Row(
+                            children: [
+                              Icon(Icons.delete),
+                              Text(AppLocalizations.of(context)!.delete)
+                            ],
+                          ))
+                    ],
                   )
                 ],
               ),

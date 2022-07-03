@@ -86,6 +86,15 @@
       }
     }
   },
+  "environments_delete": "Soll die Umgebung {name} wirklich gelöscht werden? Das Löschen kann nicht rückgängig gemacht werden.",
+  "@environments_delete": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Home Office"
+      }
+    }
+  },
   "environments_where": "Wo?",
   "environments_when": "Wann?",
   "environments_what": "Was?",
