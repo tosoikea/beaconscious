@@ -19,6 +19,19 @@ class Environment extends Equatable {
       required this.when,
       required this.what});
 
+  Environment copyWith(
+          {IconData? icon,
+          String? name,
+          List<String>? where,
+          List<DayTimeWindow>? when,
+          List<Rule>? what}) =>
+      Environment(
+          icon: icon ?? this.icon,
+          name: name ?? this.name,
+          where: where ?? this.where,
+          when: when ?? this.when,
+          what: what ?? this.what);
+
   @override
   List<Object?> get props => [icon, name, where, when, what];
 

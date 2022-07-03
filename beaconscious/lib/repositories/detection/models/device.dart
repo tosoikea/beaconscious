@@ -19,12 +19,12 @@ class Device extends Detector {
           {String? id,
           String? name,
           DateTime? creationDate,
-          String? address}) =>
+          String? bluetoothName}) =>
       Device(
           id: id ?? this.id,
           name: name ?? this.name,
           creationDate: creationDate ?? this.creationDate,
-          bluetoothName: address ?? this.bluetoothName);
+          bluetoothName: bluetoothName ?? this.bluetoothName);
 
   @override
   List<Object?> get props => super.props..addAll([bluetoothName]);

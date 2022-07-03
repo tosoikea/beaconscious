@@ -103,6 +103,7 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                         .map((e) => Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: RuleWidget(
+                                environment: environment,
                                 rule: e,
                               ),
                             ))

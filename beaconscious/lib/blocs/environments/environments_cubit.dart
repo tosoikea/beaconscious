@@ -29,6 +29,25 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
     emit(state.copyWith(environments: environments));
   }
 
+  /// Removes a rule from the environment.
+  Future<void> removeRule(
+      {required String environmentId, required Rule rule}) async {
+    final environment = state.environments.firstWhere(
+        (element) => element.name == environmentId,
+        orElse: () => Environment.empty);
+    if (environment.isEmpty) {
+      return;
+    }
+
+    final rules = [...environment.what]
+      ..removeWhere((element) => element.runtimeType == rule.runtimeType);
+    log("Deleted ${rule.runtimeType} from $environmentId");
+    final updated = environment.copyWith(what: rules);
+
+    await _repository.updateEnvironment(
+        environmentId: environmentId, environment: updated);
+  }
+
   /// Adds a known detector to the environment.
   Future<void> addDetector(
       {required String environmentId, required String detectorId}) async {
