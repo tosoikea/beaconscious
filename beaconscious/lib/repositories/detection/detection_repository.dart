@@ -3,6 +3,8 @@ import 'package:beaconscious/repositories/detection/models/detector.dart';
 import 'models/device.dart';
 
 abstract class DetectionRepository {
+  const DetectionRepository();
+
   Future<bool> addDetector({required Detector detector});
   Future<bool> removeDetector({required String detectorId});
 

@@ -6,6 +6,7 @@ import 'package:beaconscious/navigation/beaconscious_route_information_parser.da
 import 'package:beaconscious/navigation/beaconscious_router_delegate.dart';
 import 'package:beaconscious/repositories/detection/detection_repository.dart';
 import 'package:beaconscious/repositories/detection/dummy_detection_repository.dart';
+import 'package:beaconscious/repositories/detection/firebase_detection_repository.dart';
 import 'package:beaconscious/repositories/environments/dummy_environments_repository.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
 import 'package:beaconscious/repositories/logbook/dummy_logbook_repository.dart';
@@ -23,7 +24,7 @@ class BeaconsciousApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiRepositoryProvider(
           providers: [
             RepositoryProvider<DetectionRepository>(
-                create: (_) => DummyDetectionRepository()),
+                create: (_) => FirebaseDetectionRepository()),
             RepositoryProvider<EnvironmentsRepository>(
                 create: (_) => DummyEnvironmentsRepository()),
             RepositoryProvider<LogbookRepository>(

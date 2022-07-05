@@ -33,11 +33,11 @@ class CurrentDetectionWidget extends StatelessWidget {
             content: Container(
                 height: 160,
                 color: Theme.of(context).colorScheme.onPrimary,
-                child: CurrentDetectionViewWidget()),
+                child: const CurrentDetectionViewWidget()),
             caption: CardTitle(
               title: AppLocalizations.of(context)!.detection_card_caption_title,
               subtitle:
-                  "${(devices == 1) ? AppLocalizations.of(context)!.detection_close_device_singular : AppLocalizations.of(context)!.detection_close_device_plural(_amountOfDevices(state))} ${AppLocalizations.of(context)!.and} ${(locations == 1) ? AppLocalizations.of(context)!.detection_close_location_singular : AppLocalizations.of(context)!.detection_close_location_plural(_amountOfDevices(state))}",
+                  "${(devices == 1) ? AppLocalizations.of(context)!.detection_close_device_singular : AppLocalizations.of(context)!.detection_close_device_plural(devices)} ${AppLocalizations.of(context)!.and} ${(locations == 1) ? AppLocalizations.of(context)!.detection_close_location_singular : AppLocalizations.of(context)!.detection_close_location_plural(locations)}",
             ),
             onTap: () =>
                 BlocProvider.of<NavigationCubit>(context).toDetection());
