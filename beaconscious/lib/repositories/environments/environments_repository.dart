@@ -8,7 +8,4 @@ abstract class EnvironmentsRepository {
 
   /// Returns a stream that updates with all environments currently known to the application.
   Stream<List<Environment>> streamEnvironments();
-
-  /// Returns a stream that updates with the detected environment.
-  Stream<Environment> streamDetected();
 }

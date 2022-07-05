@@ -5,10 +5,9 @@ import 'package:beaconscious/blocs/navigation/navigation.dart';
 import 'package:beaconscious/navigation/beaconscious_route_information_parser.dart';
 import 'package:beaconscious/navigation/beaconscious_router_delegate.dart';
 import 'package:beaconscious/repositories/detection/detection_repository.dart';
-import 'package:beaconscious/repositories/detection/dummy_detection_repository.dart';
 import 'package:beaconscious/repositories/detection/firebase_detection_repository.dart';
-import 'package:beaconscious/repositories/environments/dummy_environments_repository.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
+import 'package:beaconscious/repositories/environments/local_environments_repository.dart';
 import 'package:beaconscious/repositories/logbook/dummy_logbook_repository.dart';
 import 'package:beaconscious/repositories/logbook/logbook_repository.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class BeaconsciousApp extends StatelessWidget {
             RepositoryProvider<DetectionRepository>(
                 create: (_) => FirebaseDetectionRepository()),
             RepositoryProvider<EnvironmentsRepository>(
-                create: (_) => DummyEnvironmentsRepository()),
+                create: (_) => LocalEnvironmentsRepository()),
             RepositoryProvider<LogbookRepository>(
                 create: (_) => DummyLogbookRepository()),
           ],
@@ -48,7 +47,8 @@ class BeaconsciousApp extends StatelessWidget {
             BlocProvider(
                 lazy: false,
                 create: (context) => EnvironmentsCubit(
-                    RepositoryProvider.of<EnvironmentsRepository>(context)))
+                    RepositoryProvider.of<EnvironmentsRepository>(context),
+                    RepositoryProvider.of<DetectionRepository>(context)))
           ], child: const _BeaconsciousAppInternal()));
 }
 

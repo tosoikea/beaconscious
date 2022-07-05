@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:beaconscious/blocs/environments/environments.dart';
+import 'package:beaconscious/repositories/detection/detection_repository.dart';
+import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,24 +11,47 @@ import '../../repositories/environments/models/models.dart';
 
 class EnvironmentsCubit extends Cubit<EnvironmentsState> {
   final EnvironmentsRepository _repository;
-  late final StreamSubscription<Environment> _detectionSubscription;
+  late final StreamSubscription<List<Detector>> _detectionSubscription;
   late final StreamSubscription<List<Environment>> _knownSubscription;
+  List<Detector> _detected;
 
-  EnvironmentsCubit(this._repository) : super(EnvironmentsState.initial()) {
+  EnvironmentsCubit(this._repository, DetectionRepository detectionRepository)
+      : _detected = <Detector>[],
+        super(EnvironmentsState.initial()) {
     _detectionSubscription =
-        _repository.streamDetected().listen(_onDetectionChanged);
+        detectionRepository.streamDetected().listen(_onDetectionChanged);
     _knownSubscription =
         _repository.streamEnvironments().listen(_onKnownChanged);
   }
 
-  void _onDetectionChanged(Environment environment) {
-    log("Detection changed to ${environment.name}");
-    emit(state.copyWith(current: environment));
+  void _detect() {
+    var environments = state.environments;
+    var possible = <Environment>[Environment.empty];
+
+    // A) Where
+    for (var environment in environments) {
+      if (environment.where
+          .every((outer) => _detected.any((inner) => inner.id == outer))) {
+        possible.add(environment);
+      }
+    }
+
+    // TODO : Add time evaluation
+    log("Detected ${environments.length} environments. Selecting last.");
+    emit(state.copyWith(current: possible.last));
+    log("Changed detection to ${possible.last}");
+  }
+
+  void _onDetectionChanged(List<Detector> detected) {
+    log("Detected ${detected.length} detectors. Updating.");
+    _detected = detected;
+    _detect();
   }
 
   void _onKnownChanged(List<Environment> environments) {
-    log("Known environments updated");
+    log("Knowing ${environments.length} environments. Updating.");
     emit(state.copyWith(environments: environments));
+    _detect();
   }
 
   /// Removes a rule from the environment.
@@ -99,6 +124,7 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
 
   /// Add an environment to the list of known and detectable environments.
   Future<void> addEnvironment({required Environment environment}) async {
+    // TODO : Distinct environments
     await _repository.addEnvironment(environment: environment);
   }
 
