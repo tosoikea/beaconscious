@@ -42,9 +42,8 @@ class EnvironmentPage extends BeaconsciousPage {
               padding: const EdgeInsets.all(8.0),
               child: BlocBuilder<EnvironmentsCubit, EnvironmentsState>(
                 builder: (context, state) => SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: state.environments.map((e) {
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    ...state.environments.map((e) {
                       bool isCurrent = state.current.name == e.name;
 
                       return Padding(
@@ -54,8 +53,12 @@ class EnvironmentPage extends BeaconsciousPage {
                           active: isCurrent,
                         ),
                       );
-                    }).toList(growable: false),
-                  ),
+                    }),
+                    // Allow for "overscroll"
+                    const SizedBox(
+                      height: 64,
+                    )
+                  ]),
                 ),
               ),
             ));

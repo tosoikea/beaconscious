@@ -4,6 +4,7 @@ import 'package:beaconscious/repositories/environments/models/models.dart';
 import 'package:beaconscious/utils/custom_date_utils.dart';
 import 'package:beaconscious/widgets/dialogs/environments_deletion_dialog.dart';
 import 'package:beaconscious/widgets/environment_detector_chip.dart';
+import 'package:beaconscious/widgets/environment_rule_addition_widget.dart';
 import 'package:beaconscious/widgets/rule_widget.dart';
 import 'package:beaconscious/widgets/time_ranges_widget.dart';
 import 'package:flutter/material.dart';
@@ -100,14 +101,19 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                   ),
                   Column(
                     children: environment.what
-                        .map((e) => Padding(
+                        .map<Widget>((e) => Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: RuleWidget(
                                 environment: environment,
                                 rule: e,
                               ),
                             ))
-                        .toList(growable: false),
+                        .toList()
+                      ..add(Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: EnvironmentRuleAdditionWidget(
+                            environment: environment),
+                      )),
                   ),
                   Row(
                     children: [

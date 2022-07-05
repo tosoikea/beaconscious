@@ -48,8 +48,8 @@ class _DetectionScreenWidget extends State<DetectionScreenWidget> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: state.detectors
+                  child: Column(children: [
+                    ...state.detectors
                         .where((element) =>
                             (devicesActive && element is Device) ||
                             (locationsActive && element is Location))
@@ -64,8 +64,12 @@ class _DetectionScreenWidget extends State<DetectionScreenWidget> {
                           detector: e,
                         ),
                       );
-                    }).toList(growable: false),
-                  ),
+                    }),
+                    // Allow for "overscroll"
+                    const SizedBox(
+                      height: 64,
+                    )
+                  ]),
                 ),
               ),
             ],

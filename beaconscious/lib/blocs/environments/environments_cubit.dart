@@ -73,6 +73,30 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
         environmentId: environmentId, environment: updated);
   }
 
+  /// Adds a rule to the environment.
+  Future<void> addRule(
+      {required String environmentId, required Rule rule}) async {
+    final environment = state.environments.firstWhere(
+        (element) => element.name == environmentId,
+        orElse: () => Environment.empty);
+    if (environment.isEmpty) {
+      return;
+    }
+
+    // Distinct rule types!
+    if (environment.what.any((e) => e.runtimeType == rule.runtimeType)) {
+      return;
+    }
+
+    // TODO : distinct rule types
+    final rules = [...environment.what, rule];
+    log("Added ${rule.runtimeType} to $environmentId");
+    final updated = environment.copyWith(what: rules);
+
+    await _repository.updateEnvironment(
+        environmentId: environmentId, environment: updated);
+  }
+
   /// Adds a known detector to the environment.
   Future<void> addDetector(
       {required String environmentId, required String detectorId}) async {
