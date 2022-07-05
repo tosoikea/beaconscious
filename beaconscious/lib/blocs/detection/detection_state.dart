@@ -1,4 +1,3 @@
-import 'package:beaconscious/repositories/detection/models/detector.dart';
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:equatable/equatable.dart';
 

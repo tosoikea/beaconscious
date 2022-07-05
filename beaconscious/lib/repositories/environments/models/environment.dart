@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 class Environment extends Equatable {
+  final bool disabled;
   final IconData icon;
   final String name;
   final List<String> where;
@@ -14,18 +15,21 @@ class Environment extends Equatable {
 
   const Environment(
       {required this.icon,
+      required this.disabled,
       required this.name,
       required this.where,
       required this.when,
       required this.what});
 
   Environment copyWith(
-          {IconData? icon,
+          {bool? disabled,
+          IconData? icon,
           String? name,
           List<String>? where,
           List<DayTimeWindow>? when,
           List<Rule>? what}) =>
       Environment(
+          disabled: disabled ?? this.disabled,
           icon: icon ?? this.icon,
           name: name ?? this.name,
           where: where ?? this.where,
@@ -33,12 +37,13 @@ class Environment extends Equatable {
           what: what ?? this.what);
 
   @override
-  List<Object?> get props => [icon, name, where, when, what];
+  List<Object?> get props => [disabled, icon, name, where, when, what];
 
   @override
   bool get stringify => true;
 
   static const empty = Environment(
+      disabled: true,
       icon: Icons.error,
       name: "",
       when: <DayTimeWindow>[],

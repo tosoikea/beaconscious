@@ -13,6 +13,7 @@ class LocalEnvironmentsRepository extends EnvironmentsRepository {
       : _environments = <String, Environment>{},
         _knownController = StreamController<List<Environment>>() {
     _environments["Home Office"] = Environment(
+        disabled: false,
         icon: Icons.business_center,
         name: "Home Office",
         where: const <String>[],

@@ -1,5 +1,7 @@
 {
   "understood": "Verstanden",
+  "disable": "Deaktivieren",
+  "enable": "Aktivieren",
   "delete": "Löschen",
   "cancel": "Abbrechen",
   "ok": "OK",
@@ -80,6 +82,7 @@
     }
   },
   "environments_title": "Umgebungen",
+  "environments_currently_disabled": "Aktuell deaktiviert",
   "environments_currently_active": "Aktuell aktiv",
   "environments_previously_active": "Zuletzt {day} aktiv",
   "@environments_previously_active": {
