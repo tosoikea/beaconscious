@@ -21,6 +21,28 @@ class CurrentDetectionWidget extends StatelessWidget {
   int _amountOfLocations(DetectionState state) =>
       state.detected.whereType<Location>().length;
 
+  String _deviceDescription(BuildContext context, int devices) {
+    if (devices == 0) {
+      return AppLocalizations.of(context)!.detection_close_device_zero;
+    } else if (devices == 1) {
+      return AppLocalizations.of(context)!.detection_close_device_singular;
+    } else {
+      return AppLocalizations.of(context)!
+          .detection_close_device_plural(devices);
+    }
+  }
+
+  String _locationDescription(BuildContext context, int locations) {
+    if (locations == 0) {
+      return AppLocalizations.of(context)!.detection_close_location_zero;
+    } else if (locations == 1) {
+      return AppLocalizations.of(context)!.detection_close_location_singular;
+    } else {
+      return AppLocalizations.of(context)!
+          .detection_close_location_plural(locations);
+    }
+  }
+
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<DetectionCubit, DetectionState>(builder: (context, state) {
@@ -37,7 +59,7 @@ class CurrentDetectionWidget extends StatelessWidget {
             caption: CardTitle(
               title: AppLocalizations.of(context)!.detection_card_caption_title,
               subtitle:
-                  "${(devices == 1) ? AppLocalizations.of(context)!.detection_close_device_singular : AppLocalizations.of(context)!.detection_close_device_plural(devices)} ${AppLocalizations.of(context)!.and} ${(locations == 1) ? AppLocalizations.of(context)!.detection_close_location_singular : AppLocalizations.of(context)!.detection_close_location_plural(locations)}",
+                  "${_deviceDescription(context, devices)} ${AppLocalizations.of(context)!.and} ${_locationDescription(context, locations)}",
             ),
             onTap: () =>
                 BlocProvider.of<NavigationCubit>(context).toDetection());

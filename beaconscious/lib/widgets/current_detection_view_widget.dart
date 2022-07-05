@@ -11,10 +11,14 @@ class CurrentDetectionViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<DetectionCubit, DetectionState>(builder: (context, state) {
-        if (state.detected.isEmpty){
-          return Container();
+        if (state.detected.isEmpty) {
+          return Center(
+              child: Icon(
+            Icons.person,
+            size: 48,
+            color: Theme.of(context).colorScheme.onSecondaryContainer
+          ));
         }
-
 
         final graph = Graph()..isTree = true;
         // TODO : Prevent collision, even though unlikely

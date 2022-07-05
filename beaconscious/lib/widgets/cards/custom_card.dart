@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
   final IconData leading;
+  final Color? leadingColor;
+  final Color? leadingBackgroundColor;
+
   final Color? backgroundColor;
 
   final String title;
@@ -23,6 +26,8 @@ class CustomCard extends StatelessWidget {
       {super.key,
       required this.leading,
       required this.title,
+      this.leadingColor,
+      this.leadingBackgroundColor,
       this.backgroundColor,
       this.titleColor,
       this.onTap,
@@ -53,12 +58,13 @@ class CustomCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: CircleAvatar(
-                            backgroundColor:
+                            backgroundColor: leadingBackgroundColor ??
                                 Theme.of(context).colorScheme.primary,
                             radius: 20,
                             child: Icon(
                               leading,
-                              color: Theme.of(context).colorScheme.onPrimary,
+                              color: leadingColor ??
+                                  Theme.of(context).colorScheme.onPrimary,
                               size: 32,
                             ),
                           ),
