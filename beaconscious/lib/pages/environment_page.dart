@@ -3,7 +3,6 @@ import 'package:beaconscious/pages/beaconscious_page.dart';
 import 'package:beaconscious/widgets/dialogs/info_dialog.dart';
 import 'package:beaconscious/widgets/environment/environment_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,6 +15,7 @@ class EnvironmentPage extends BeaconsciousPage {
             backgroundColor: Theme.of(context).colorScheme.background,
             floatingActionButton: FloatingActionButton(
               onPressed: () {
+                // TODO : Add environments
                 print("Pressed");
               },
               child: const Icon(Icons.add),

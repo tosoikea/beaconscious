@@ -6,7 +6,7 @@ import 'package:beaconscious/pages/analysis_page.dart';
 import 'package:beaconscious/pages/detection_page.dart';
 import 'package:beaconscious/pages/environment_page.dart';
 import 'package:beaconscious/pages/home_page.dart';
-import 'package:flutter/materials.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BeaconsciousRouterDelegate extends RouterDelegate<RoutePath>

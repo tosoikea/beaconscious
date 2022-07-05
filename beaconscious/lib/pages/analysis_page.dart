@@ -4,7 +4,6 @@ import 'package:beaconscious/widgets/analysis_diagram_widget.dart';
 import 'package:beaconscious/widgets/analysis_remarks_widget.dart';
 import 'package:beaconscious/widgets/dialogs/info_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum AnalysisRange { day, week, month }

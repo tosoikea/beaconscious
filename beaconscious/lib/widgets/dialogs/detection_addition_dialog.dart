@@ -1,8 +1,6 @@
-import 'dart:math';
 
 import 'package:beaconscious/blocs/detection/detection.dart';
 import 'package:beaconscious/repositories/detection/models/models.dart';
-import 'package:beaconscious/utils/detector_icon_visitor.dart';
 import 'package:beaconscious/widgets/dialogs/custom_dialog.dart';
 import 'package:beaconscious/widgets/dialogs/detection_device_addition_dialog.dart';
 import 'package:beaconscious/widgets/dialogs/detection_device_selection_dialog.dart';
@@ -10,7 +8,6 @@ import 'package:beaconscious/widgets/dialogs/detection_type_selection_dialog.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetectionAdditionDialog extends StatefulWidget {
   const DetectionAdditionDialog({Key? key}) : super(key: key);
@@ -63,7 +60,7 @@ class _DetectionAdditionDialogState extends State<DetectionAdditionDialog> {
                 title: "TODO",
                 subtitle: "",
                 content: Container(),
-                actions: <Widget>[]);
+                actions: const <Widget>[]);
         }
       },
     );

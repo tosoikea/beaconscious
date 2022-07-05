@@ -1,7 +1,6 @@
 import 'package:beaconscious/widgets/dialogs/custom_dialog.dart';
 import 'package:beaconscious/widgets/dialogs/detection_dialog_column.dart';
 import 'package:beaconscious/widgets/dialogs/detection_dialog_column_entry.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,14 +19,14 @@ class DetectionTypeSelectionDialog extends StatelessWidget {
                 children: [
                   DetectionDialogColumnEntry(
                     onTap: onTap,
-                    leading: Icon(Icons.devices_other_rounded),
+                    leading: const Icon(Icons.devices_other_rounded),
                     children: [
                       Text(AppLocalizations.of(context)!.detection_device)
                     ],
                   ),
                   DetectionDialogColumnEntry(
                     onTap: onTap,
-                    leading: Icon(Icons.location_on),
+                    leading: const Icon(Icons.location_on),
                     children: [
                       Text(AppLocalizations.of(context)!.detection_location)
                     ],

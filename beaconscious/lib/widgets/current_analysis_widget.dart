@@ -3,7 +3,6 @@ import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/blocs/navigation/navigation.dart';
 import 'package:beaconscious/widgets/cards/card_title.dart';
 import 'package:beaconscious/widgets/current_analysis_week_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

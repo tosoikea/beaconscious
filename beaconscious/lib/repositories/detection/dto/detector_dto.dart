@@ -1,6 +1,5 @@
 import 'package:beaconscious/repositories/detection/dto/detector_device_dto.dart';
 import 'package:beaconscious/repositories/detection/dto/detector_location_dto.dart';
-import 'package:beaconscious/repositories/detection/dto/device_dto.dart';
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';

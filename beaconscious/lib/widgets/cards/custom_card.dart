@@ -1,5 +1,4 @@
 import 'package:beaconscious/widgets/cards/card_title.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {

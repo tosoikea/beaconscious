@@ -4,11 +4,9 @@ import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/utils/detector_description_visitor.dart';
 import 'package:beaconscious/utils/detector_icon_visitor.dart';
 import 'package:beaconscious/widgets/cards/custom_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 
 class DetectorWidget extends StatefulWidget {
   final Detector detector;
@@ -40,7 +38,7 @@ class _DetectorWidgetState extends State<DetectorWidget> {
           onPressed: () => setState(() {
             expanded = true;
           }),
-          icon: Icon(size: 24, Icons.arrow_drop_down_rounded),
+          icon: const Icon(Icons.arrow_drop_down_rounded),
         ),
       );
     } else {
@@ -67,7 +65,7 @@ class _DetectorWidgetState extends State<DetectorWidget> {
                         .removeDetector(detector: widget.detector),
                 child: Row(
                   children: [
-                    Icon(Icons.delete),
+                    const Icon(Icons.delete),
                     Text(AppLocalizations.of(context)!.delete)
                   ],
                 ))
@@ -77,7 +75,7 @@ class _DetectorWidgetState extends State<DetectorWidget> {
           onPressed: () => setState(() {
             expanded = false;
           }),
-          icon: Icon(size: 24, Icons.arrow_drop_up_rounded),
+          icon: const Icon(Icons.arrow_drop_up_rounded),
         ),
       );
     }

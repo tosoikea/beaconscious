@@ -4,7 +4,6 @@ import 'package:beaconscious/repositories/environments/models/environment.dart';
 import 'package:beaconscious/utils/environment_utils.dart';
 import 'package:beaconscious/widgets/cards/custom_card.dart';
 import 'package:beaconscious/widgets/environment/environment_details_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

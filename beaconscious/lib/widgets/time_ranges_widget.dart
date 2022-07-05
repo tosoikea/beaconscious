@@ -1,6 +1,5 @@
 import 'package:beaconscious/repositories/environments/models/models.dart';
 import 'package:beaconscious/utils/time_of_day_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class _AnnotatedTimeRange<T> {

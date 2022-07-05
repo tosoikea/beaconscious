@@ -1,7 +1,6 @@
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/utils/detector_icon_visitor.dart';
 import 'package:beaconscious/widgets/custom_chip.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DetectorChip extends StatelessWidget {

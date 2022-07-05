@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// TODO: This class has to provide actual insights
 class AnalysisRemarksWidget extends StatelessWidget {
+  const AnalysisRemarksWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) =>
       LayoutBuilder(builder: (context, constraints) {

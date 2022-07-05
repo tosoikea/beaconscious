@@ -1,14 +1,12 @@
 import 'package:beaconscious/blocs/detection/detection.dart';
 import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
-import 'package:beaconscious/utils/custom_date_utils.dart';
 import 'package:beaconscious/widgets/dialogs/environments_deletion_dialog.dart';
 import 'package:beaconscious/widgets/environment/environment_details_section_widget.dart';
 import 'package:beaconscious/widgets/environment/environment_rule_addition_widget.dart';
 import 'package:beaconscious/widgets/environment/environment_when_widget.dart';
 import 'package:beaconscious/widgets/environment/environment_detector_chip.dart';
 import 'package:beaconscious/widgets/rule_widget.dart';
-import 'package:beaconscious/widgets/time_ranges_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

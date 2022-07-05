@@ -2,7 +2,6 @@ import 'package:beaconscious/blocs/analysis/analysis.dart';
 import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/pages/analysis_page.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

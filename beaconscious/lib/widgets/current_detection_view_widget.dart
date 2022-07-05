@@ -1,6 +1,5 @@
 import 'package:beaconscious/blocs/detection/detection.dart';
 import 'package:beaconscious/utils/detector_icon_visitor.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphview/GraphView.dart';

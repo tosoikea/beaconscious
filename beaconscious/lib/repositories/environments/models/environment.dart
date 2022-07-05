@@ -1,7 +1,5 @@
-import 'package:beaconscious/repositories/detection/models/detector.dart';
 import 'package:beaconscious/repositories/environments/models/day_time_window.dart';
 import 'package:beaconscious/repositories/environments/models/rules/rules.dart';
-import 'package:beaconscious/repositories/environments/models/time_range.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

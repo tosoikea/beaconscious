@@ -17,7 +17,7 @@ class LocalEnvironmentsRepository extends EnvironmentsRepository {
         icon: Icons.business_center,
         name: "Home Office",
         where: const <String>[],
-        what: <Rule>[DoNotDisturbRule()],
+        what: const <Rule>[DoNotDisturbRule()],
         when: List.generate(
             7,
             (index) => DayTimeWindow(weekDay: index + 1, ranges: [

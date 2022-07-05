@@ -1,6 +1,5 @@
 // TODO : Remove when Material 3 support is given
 import 'package:beaconscious/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomChip extends StatelessWidget {
