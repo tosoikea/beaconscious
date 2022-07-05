@@ -1,6 +1,7 @@
 import 'package:beaconscious/blocs/analysis/analysis.dart';
 import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/pages/analysis_page.dart';
+import 'package:beaconscious/repositories/environments/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,8 @@ class AnalysisDiagramWidget extends StatelessWidget {
                             .map((e) => _AnalysisDiagramData(
                                 icon: eState.environments
                                     .firstWhere(
-                                        (element) => element.name == e.key)
+                                        (element) => element.name == e.key,
+                                        orElse: () => Environment.empty)
                                     .icon,
                                 name: e.key,
                                 seconds: e.value.map((e) => e.seconds).reduce(

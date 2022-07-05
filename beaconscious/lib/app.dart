@@ -17,28 +17,22 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class BeaconsciousApp extends StatelessWidget {
-  const BeaconsciousApp();
+  const BeaconsciousApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => MultiRepositoryProvider(
           providers: [
             RepositoryProvider<DetectionRepository>(
-                create: (_) => FirebaseDetectionRepository()),
+                create: (_) => const FirebaseDetectionRepository()),
             RepositoryProvider<EnvironmentsRepository>(
                 create: (_) => LocalEnvironmentsRepository()),
             RepositoryProvider<LogbookRepository>(
-                create: (_) => DummyLogbookRepository()),
+                create: (_) => const DummyLogbookRepository()),
           ],
           child: MultiBlocProvider(providers: [
             BlocProvider(
               lazy: false,
               create: (_) => NavigationCubit(),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (context) => AnalysisCubit(
-                  RepositoryProvider.of<LogbookRepository>(context),
-                  BlocProvider.of<NavigationCubit>(context)),
             ),
             BlocProvider(
                 lazy: false,
@@ -48,7 +42,15 @@ class BeaconsciousApp extends StatelessWidget {
                 lazy: false,
                 create: (context) => EnvironmentsCubit(
                     RepositoryProvider.of<EnvironmentsRepository>(context),
-                    RepositoryProvider.of<DetectionRepository>(context)))
+                    RepositoryProvider.of<DetectionRepository>(context))),
+            BlocProvider(
+              lazy: false,
+              create: (context) => AnalysisCubit(
+                RepositoryProvider.of<LogbookRepository>(context),
+                BlocProvider.of<NavigationCubit>(context),
+                BlocProvider.of<EnvironmentsCubit>(context),
+              ),
+            ),
           ], child: const _BeaconsciousAppInternal()));
 }
 

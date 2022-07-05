@@ -2,20 +2,34 @@ import 'dart:async';
 
 import 'package:beaconscious/blocs/analysis/analysis.dart';
 import 'package:beaconscious/blocs/analysis/analysis_state.dart';
+import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/blocs/navigation/navigation.dart';
+import 'package:beaconscious/repositories/environments/models/models.dart';
 import 'package:beaconscious/repositories/logbook/logbook_repository.dart';
 import 'package:beaconscious/repositories/logbook/models/logbook_entry.dart';
 import 'package:beaconscious/repositories/logbook/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnalysisCubit extends Cubit<AnalysisState> {
+  late final StreamSubscription _environmentSubscription;
   late final StreamSubscription _navigationSubscription;
   final LogbookRepository _repository;
+  List<Environment> _environments;
 
-  AnalysisCubit(this._repository, NavigationCubit navigationCubit)
-      : super(AnalysisState.initial()) {
+  AnalysisCubit(this._repository, NavigationCubit navigationCubit,
+      EnvironmentsCubit environmentCubit)
+      : _environments = [],
+        super(AnalysisState.initial()) {
+    _environmentSubscription =
+        environmentCubit.stream.listen(_onEnvironmentsStateChanged);
     _navigationSubscription =
         navigationCubit.stream.listen(_onNavigationStateChanged);
+  }
+
+  void _onEnvironmentsStateChanged(EnvironmentsState state) async {
+    // TODO : More effective, only when status is addition or removal of environment etc.
+    _environments = state.environments;
+    await load();
   }
 
   void _onNavigationStateChanged(AppNavigationState state) async {
@@ -27,8 +41,12 @@ class AnalysisCubit extends Cubit<AnalysisState> {
 
   Future<void> load() async {
     emit(state.copyWith(status: AnalysisStatus.loading));
+    final stored = <String, List<LogbookEntry>>{};
 
-    var stored = await _repository.getEntries();
+    for (var environment in _environments) {
+      stored[environment.name] =
+          await _repository.getEntries(environmentId: environment.name);
+    }
 
     // 1. This week : Last 7 Days (incl. today)
     var currentWeek = <String, List<LogbookEntry>>{};
@@ -70,6 +88,7 @@ class AnalysisCubit extends Cubit<AnalysisState> {
 
   @override
   Future<void> close() {
+    _environmentSubscription.cancel();
     _navigationSubscription.cancel();
     return super.close();
   }
