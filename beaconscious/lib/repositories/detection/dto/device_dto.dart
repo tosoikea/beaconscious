@@ -4,32 +4,33 @@ import 'package:equatable/equatable.dart';
 
 class DeviceDTO extends Equatable {
   final String name;
-  final String identifier;
+  final bool detected;
 
-  const DeviceDTO({required this.name, required this.identifier});
+  const DeviceDTO({required this.name, required this.detected});
 
   factory DeviceDTO.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
     final data = snapshot.data();
-    final id = snapshot.id;
 
     return DeviceDTO(
-        identifier: id,
+        detected: data != null && data.containsKey("detected")
+            ? data["detected"]!
+            : "",
         name: data != null && data.containsKey("name") ? data["name"]! : "");
   }
 
   Map<String, dynamic> toFirestore() {
-    return {"name": name};
+    return {"name": name, "detected": detected};
   }
 
   @override
-  List<Object?> get props => [identifier, name];
+  List<Object?> get props => [name, detected];
 
   Device toModel() {
     return Device(
-        id: identifier,
+        id: name,
         name: name,
         creationDate: DateTime.now(),
         bluetoothName: name);

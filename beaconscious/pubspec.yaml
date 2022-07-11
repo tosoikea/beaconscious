@@ -59,6 +59,8 @@ dependencies:
   # Wizard of Of testing
   firebase_core: ^1.17.1
   cloud_firestore: ^3.1.17
+  # Combines devices and detectors stream
+  stream_transform: ^2.0.0
 
 
 dev_dependencies:

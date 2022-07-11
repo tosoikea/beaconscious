@@ -8,13 +8,9 @@ abstract class DetectorDTO extends Equatable {
   final String id;
   final String name;
   final DateTime creationDate;
-  final bool detected;
 
   const DetectorDTO(
-      {required this.id,
-      required this.name,
-      required this.creationDate,
-      required this.detected});
+      {required this.id, required this.name, required this.creationDate});
 
   factory DetectorDTO.fromModel(Detector detector) {
     if (detector is Device) {
@@ -22,16 +18,14 @@ abstract class DetectorDTO extends Equatable {
           bluetoothName: detector.bluetoothName,
           id: detector.id,
           name: detector.name,
-          creationDate: detector.creationDate,
-          detected: false);
+          creationDate: detector.creationDate);
     } else if (detector is Location) {
       return DetectorLocationDTO(
           latitude: detector.latitude,
           longitude: detector.longitude,
           id: detector.id,
           name: detector.name,
-          creationDate: detector.creationDate,
-          detected: false);
+          creationDate: detector.creationDate);
     } else {
       throw ArgumentError("Detector Type ${detector.runtimeType} is unknown");
     }
@@ -55,14 +49,12 @@ abstract class DetectorDTO extends Equatable {
     switch (data["type"]!) {
       case "device":
         return DetectorDeviceDTO(
-            detected: data["detected"],
             bluetoothName: data["bluetoothName"],
             id: id,
             name: data["name"],
             creationDate: (data["creationDate"] as Timestamp).toDate());
       case "location":
         return DetectorLocationDTO(
-            detected: data["detected"],
             latitude: data["latitude"],
             longitude: data["longitude"],
             id: id,
@@ -78,5 +70,5 @@ abstract class DetectorDTO extends Equatable {
   Detector toModel();
 
   @override
-  List<Object?> get props => [id, name, creationDate, detected];
+  List<Object?> get props => [id, name, creationDate];
 }

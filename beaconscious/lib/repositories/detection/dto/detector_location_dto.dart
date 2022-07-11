@@ -10,10 +10,8 @@ class DetectorLocationDTO extends DetectorDTO {
       required this.longitude,
       required String id,
       required String name,
-      required DateTime creationDate,
-      required bool detected})
-      : super(
-            id: id, name: name, creationDate: creationDate, detected: detected);
+      required DateTime creationDate})
+      : super(id: id, name: name, creationDate: creationDate);
 
   @override
   Map<String, dynamic> toFirestore() => {
@@ -22,7 +20,6 @@ class DetectorLocationDTO extends DetectorDTO {
         "creationDate": creationDate,
         "latitude": latitude,
         "longitude": longitude,
-        "detected": detected,
         "type": "location"
       };
 

@@ -8,10 +8,8 @@ class DetectorDeviceDTO extends DetectorDTO {
       {required this.bluetoothName,
       required String id,
       required String name,
-      required DateTime creationDate,
-      required bool detected})
-      : super(
-            id: id, name: name, creationDate: creationDate, detected: detected);
+      required DateTime creationDate})
+      : super(id: id, name: name, creationDate: creationDate);
 
   @override
   Map<String, dynamic> toFirestore() => {
@@ -19,7 +17,6 @@ class DetectorDeviceDTO extends DetectorDTO {
         "name": name,
         "creationDate": creationDate,
         "bluetoothName": bluetoothName,
-        "detected": detected,
         "type": "device"
       };
 
