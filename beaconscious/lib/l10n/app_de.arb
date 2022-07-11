@@ -23,8 +23,8 @@
   "saturday_short": "Sa",
   "sunday_short": "So",
   "month": "Monat",
-  "environment_card_title" : "Aktuelle Umgebung",
-  "environment_card_unknown" : "Keine Umgebung erkannt",
+  "environment_card_title" : "Aktuelles Environment",
+  "environment_card_unknown" : "Kein Environment erkannt",
   "detection_card_title" : "Erkennung",
   "detection_card_caption_title" : "In der Nähe von",
   "detection_close_device_zero" : "keinem Gerät",
@@ -72,7 +72,7 @@
       }
     }
   },
-  "analysis_card_caption_environment" : "in der Umgebung {environment}",
+  "analysis_card_caption_environment" : "in dem Environment {environment}",
   "@analysis_card_caption_environment": {
     "placeholders": {
       "environment" : {
@@ -81,7 +81,7 @@
       }
     }
   },
-  "environments_title": "Umgebungen",
+  "environments_title": "Environments",
   "environments_currently_disabled": "Aktuell deaktiviert",
   "environments_currently_active": "Aktuell aktiv",
   "environments_previously_active": "Zuletzt {day} aktiv",
@@ -93,7 +93,7 @@
       }
     }
   },
-  "environments_delete": "Soll die Umgebung {name} wirklich gelöscht werden? Das Löschen kann nicht rückgängig gemacht werden.",
+  "environments_delete": "Soll das Environment {name} wirklich gelöscht werden? Das Löschen kann nicht rückgängig gemacht werden.",
   "@environments_delete": {
     "placeholders": {
       "name": {
@@ -123,7 +123,7 @@
   "detection_selection_device_creation_title" : "Neues Bluetooth-Gerät",
   "detection_selection_device_creation": "Bitte gebe einen Namen für das Bluetooth-Gerät ein.",
   "analysis_title": "Übersicht",
-  "info_environment": "Eine Umgebung setzt sich aus dem Wo und Wann zusammen. Das Wo gibst du durch die Geräte oder Orte an, bei denen du dich befindest. Beim Wann gibst du Start- und Endzeiten für die Umgebung an. Zusätzlich kannst du Effekte definieren, die automatisch ausgelöst werden, sobald die Umgebung aktiv ist.",
-  "info_detection": "Du kannst Umgebungen abhängig davon festlegen wo du dich befindest. Das Wo können hierbei Geräte oder Orte sein. Umgebungen werden dann beispielsweise erkannt, wenn du dich in der Nähe dieser Geräte oder Orte befindest. Hierfür müssen die zu erkennenden Geräte oder Orte von dir in der Anwendung hinterlegt werden.",
-  "info_analysis": " In der Übersicht kannst du dir anzeigen lassen, wie sich deine Zeit in den einzelnen Umgebungen verändert hat. Hierfür kannst du zwischen einer Tages-, Wochen- und Monatsübersicht wechseln."
+  "info_environment": "Ein Environment setzt sich aus dem Wo und Wann zusammen. Das Wo gibst du durch die Geräte oder Orte an, bei denen du dich befindest. Beim Wann gibst du Start- und Endzeiten für das Environment an. Zusätzlich kannst du Effekte definieren, die automatisch ausgelöst werden, sobald das Environment aktiv ist.",
+  "info_detection": "Du kannst Environments abhängig davon festlegen wo du dich befindest. Das Wo können hierbei Geräte oder Orte sein. Environments werden dann beispielsweise erkannt, wenn du dich in der Nähe dieser Geräte oder Orte befindest. Hierfür müssen die zu erkennenden Geräte oder Orte von dir in der Anwendung hinterlegt werden.",
+  "info_analysis": " In der Übersicht kannst du dir anzeigen lassen, wie sich deine Zeit in den einzelnen Environments verändert hat. Hierfür kannst du zwischen einer Tages-, Wochen- und Monatsübersicht wechseln."
 }
