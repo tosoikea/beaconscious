@@ -5,6 +5,7 @@ import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/repositories/detection/detection_repository.dart';
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
+import 'package:beaconscious/repositories/environments/models/day_time_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -178,7 +179,8 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
         disabled: true,
         name: name,
         where: const [],
-        when: const [],
+        when: List.generate(
+            7, (index) => DayTimeWindow(weekDay: index + 1, ranges: const [])),
         what: const []);
 
     await _repository.addEnvironment(environment: environment);
