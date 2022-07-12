@@ -27,13 +27,18 @@ class _EnvironmentWidgetState extends State<EnvironmentWidget> {
         if (!expanded) {
           return CustomCard(
             leading: widget.environment.icon,
+            leadingBackgroundColor: (widget.environment.disabled)
+                ? Theme.of(context).colorScheme.tertiary
+                : null,
             title: widget.environment.name,
             //TODO : Determine the actual day (e.g. gestern, etc.)
             subtitle:
                 EnvironmentUtils.getStatus(context, widget.environment, state),
             subtitleColor: EnvironmentUtils.isActive(widget.environment, state)
                 ? Constants.primary50
-                : null,
+                : (widget.environment.disabled)
+                    ? Theme.of(context).colorScheme.tertiary
+                    : null,
             action: IconButton(
               onPressed: () => setState(() {
                 expanded = true;
@@ -54,6 +59,9 @@ class _EnvironmentWidgetState extends State<EnvironmentWidget> {
               CustomCard(
                 backgroundColor: Constants.primary80,
                 leading: widget.environment.icon,
+                leadingBackgroundColor: (widget.environment.disabled)
+                    ? Theme.of(context).colorScheme.tertiary
+                    : null,
                 title: widget.environment.name,
                 //TODO : Determine the actual day (e.g. gestern, etc.)
                 subtitle: EnvironmentUtils.getStatus(
@@ -61,7 +69,9 @@ class _EnvironmentWidgetState extends State<EnvironmentWidget> {
                 subtitleColor:
                     EnvironmentUtils.isActive(widget.environment, state)
                         ? Theme.of(context).colorScheme.primary
-                        : null,
+                        : (widget.environment.disabled)
+                            ? Theme.of(context).colorScheme.tertiary
+                            : null,
                 action: IconButton(
                   onPressed: () => setState(() {
                     expanded = false;

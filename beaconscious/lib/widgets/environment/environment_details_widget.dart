@@ -67,8 +67,7 @@ class EnvironmentDetailsWidget extends StatelessWidget {
                       children: [
                         TextButton.icon(
                             style: TextButton.styleFrom(
-                                primary:
-                                    Theme.of(context).colorScheme.tertiary),
+                                primary: Theme.of(context).colorScheme.secondary),
                             onPressed: () async => await showDialog(
                                 context: context,
                                 builder: (BuildContext context) =>
