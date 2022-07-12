@@ -1,5 +1,5 @@
 import 'package:beaconscious/widgets/dialogs/custom_dialog.dart';
-import 'package:beaconscious/widgets/dialogs/detection_dialog_column.dart';
+import 'package:beaconscious/widgets/dialogs/custom_dialog_column.dart';
 import 'package:beaconscious/widgets/dialogs/detection_dialog_column_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,7 +15,7 @@ class DetectionTypeSelectionDialog extends StatelessWidget {
           subtitle: AppLocalizations.of(context)!.detection_selection_type,
           content: Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: DetectionDialogColumn(
+              child: CustomDialogColumn(
                 children: [
                   DetectionDialogColumnEntry(
                     onTap: onTap,

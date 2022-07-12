@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:form_builder_validators/localization/l10n.dart';
 
 class BeaconsciousApp extends StatelessWidget {
   const BeaconsciousApp({Key? key}) : super(key: key);
@@ -109,6 +110,7 @@ class _BeaconsciousAppInternal extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
+        FormBuilderLocalizations.delegate
       ],
       supportedLocales: const [
         Locale('de', 'DE'),

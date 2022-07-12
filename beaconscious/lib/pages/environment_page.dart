@@ -1,5 +1,6 @@
 import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/pages/beaconscious_page.dart';
+import 'package:beaconscious/widgets/dialogs/environment_addition_dialog.dart';
 import 'package:beaconscious/widgets/dialogs/info_dialog.dart';
 import 'package:beaconscious/widgets/environment/environment_widget.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,11 @@ class EnvironmentPage extends BeaconsciousPage {
         return Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
             floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                // TODO : Add environments
-                print("Pressed");
+              onPressed: () async {
+                await showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        const EnvironmentAdditionDialog());
               },
               child: const Icon(Icons.add),
             ),

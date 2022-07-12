@@ -5,6 +5,7 @@ import 'package:beaconscious/blocs/environments/environments.dart';
 import 'package:beaconscious/repositories/detection/detection_repository.dart';
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repositories/environments/models/models.dart';
@@ -168,8 +169,18 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
           });
 
   /// Add an environment to the list of known and detectable environments.
-  Future<void> addEnvironment({required Environment environment}) async {
+  /// The added environment is disabled by default.
+  Future<void> addEnvironment(
+      {required String name, required IconData icon}) async {
     // TODO : Distinct environments
+    final environment = Environment(
+        icon: icon,
+        disabled: true,
+        name: name,
+        where: const [],
+        when: const [],
+        what: const []);
+
     await _repository.addEnvironment(environment: environment);
   }
 

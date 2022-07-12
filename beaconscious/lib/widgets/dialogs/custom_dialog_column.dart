@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class DetectionDialogColumn extends StatelessWidget {
+class CustomDialogColumn extends StatelessWidget {
   final List<Widget> children;
 
-  const DetectionDialogColumn({super.key, required this.children});
+  const CustomDialogColumn({super.key, required this.children});
 
   @override
   Widget build(BuildContext context) => Column(

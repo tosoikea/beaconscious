@@ -3,7 +3,7 @@ import 'package:beaconscious/widgets/dialogs/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-typedef DeviceSavedCallback = void Function(Device saved);
+typedef DeviceSavedCallback = Future<void> Function(Device saved);
 
 class DetectionDeviceAdditionDialog extends StatefulWidget {
   final Device device;
@@ -44,10 +44,14 @@ class _DetectionDeviceAdditionDialogState
         ),
         actions: <Widget>[
           TextButton(
-              onPressed: () {
-                widget
-                    .onSave(widget.device.copyWith(name: _nameController.text));
-                Navigator.pop(context);
+              onPressed: () async {
+                await widget
+                    .onSave(widget.device.copyWith(name: _nameController.text))
+                    .whenComplete(() {
+                  if (mounted) {
+                    Navigator.pop(context);
+                  }
+                });
               },
               child: Text(AppLocalizations.of(context)!.ok)),
           TextButton(
