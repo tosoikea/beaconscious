@@ -57,8 +57,35 @@ class EnvironmentDaytimeWindowDialog extends StatelessWidget {
                   );
                 },
                 onAdd: (notifier) async {
-                  final result =
-                      await picker.showTimeRangePicker(context: context);
+                  final result = await picker.showTimeRangePicker(
+                      context: context,
+                      strokeWidth: 4,
+                      ticks: 12,
+                      ticksOffset: 2,
+                      ticksLength: 8,
+                      handlerRadius: 8,
+                      ticksColor: Colors.grey,
+                      rotateLabels: false,
+                      labelOffset: 30,
+                      padding: 55,
+                      labelStyle: Theme.of(context).textTheme.labelSmall,
+                      clockRotation: 180.0,
+                      labels: [
+                        "24 h",
+                        "3 h",
+                        "6 h",
+                        "9 h",
+                        "12 h",
+                        "15 h",
+                        "18 h",
+                        "21 h"
+                      ].asMap().entries.map((e) {
+                        return picker.ClockLabel.fromIndex(
+                            idx: e.key, length: 8, text: e.value);
+                      }).toList(),
+                      disabledTime: picker.TimeRange(
+                          startTime: const TimeOfDay(hour: 23, minute: 55),
+                          endTime: const TimeOfDay(hour: 0, minute: 0)));
 
                   if (result != null) {
                     final range = result as picker.TimeRange;

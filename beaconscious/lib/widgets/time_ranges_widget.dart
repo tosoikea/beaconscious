@@ -60,50 +60,59 @@ class TimeRangesWidget extends StatelessWidget {
     return res;
   }
 
-  @override
-  Widget build(BuildContext context) => Row(
-        children: _getFilled().map((e) {
-          var difference =
-              TimeOfDayUtils.difference(end: e.range.end, start: e.range.start);
+  BorderRadius _getRadius(int index, int length) {
+    if (index == 0 && index == length - 1) {
+      return const BorderRadius.all(Radius.circular(12));
+    } else if (index == 0) {
+      return const BorderRadius.horizontal(left: Radius.circular(12));
+    } else if (index == length - 1) {
+      return const BorderRadius.horizontal(right: Radius.circular(12));
+    } else {
+      return const BorderRadius.only();
+    }
+  }
 
-          return Flexible(
-            flex: difference.hour * 60 + difference.minute,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // TODO : Change style, only for prototype to work...
-                if (e.annotation && difference.hour > 2)
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(TimeOfDayUtils.getPadded(e.range.start),
-                        style: Theme.of(context).textTheme.labelSmall),
-                  ),
-                Container(
-                  height: 16,
-                  decoration: BoxDecoration(
-                      color: (e.annotation)
-                          ? Theme.of(context).colorScheme.primary
-                          : Colors.white,
-                      borderRadius:
-                          (e.range.start == const TimeOfDay(hour: 0, minute: 0))
-                              ? const BorderRadius.horizontal(
-                                  left: Radius.circular(12))
-                              : (e.range.end ==
-                                      const TimeOfDay(hour: 23, minute: 59))
-                                  ? const BorderRadius.horizontal(
-                                      right: Radius.circular(12))
-                                  : null),
+  @override
+  Widget build(BuildContext context) {
+    final filled = _getFilled();
+
+    return Row(
+      children: List.generate(filled.length, (index) {
+        final e = filled[index];
+        var difference =
+            TimeOfDayUtils.difference(end: e.range.end, start: e.range.start);
+
+        return Flexible(
+          flex: difference.hour * 60 + difference.minute,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // TODO : Change style, only for prototype to work...
+              if (e.annotation && difference.hour > 2)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(TimeOfDayUtils.getPadded(e.range.start),
+                      style: Theme.of(context).textTheme.labelSmall),
                 ),
-                // TODO : Change style, only for prototype to work...
-                if (e.annotation && difference.hour > 2)
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(TimeOfDayUtils.getPadded(e.range.end),
-                        style: Theme.of(context).textTheme.labelSmall),
-                  ),
-              ],
-            ),
-          );
-        }).toList(),
-      );
+              Container(
+                height: 16,
+                decoration: BoxDecoration(
+                    color: (e.annotation)
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.white,
+                    borderRadius: _getRadius(index, filled.length)),
+              ),
+              // TODO : Change style, only for prototype to work...
+              if (e.annotation && difference.hour > 2)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(TimeOfDayUtils.getPadded(e.range.end),
+                      style: Theme.of(context).textTheme.labelSmall),
+                ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
 }
