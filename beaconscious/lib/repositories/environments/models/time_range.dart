@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class TimeRange extends Equatable {
+class TimeRange extends Equatable{
   final TimeOfDay start;
   final TimeOfDay end;
 

@@ -6,6 +6,8 @@ import 'package:beaconscious/repositories/detection/detection_repository.dart';
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
 import 'package:beaconscious/repositories/environments/models/day_time_window.dart';
+import 'package:beaconscious/utils/time_of_day_utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -71,6 +73,95 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
 
     await callback(current);
   }
+
+  /// Removes a time range from the environment.
+  Future<void> removeRange(
+          {required String environmentId,
+          required int weekDay,
+          required TimeRange range}) async =>
+      await _apply(
+          environmentId: environmentId,
+          callback: (current) async {
+            final when = [...current.when]
+                .map((e) => (e.weekDay == weekDay)
+                    ? DayTimeWindow(
+                        weekDay: weekDay,
+                        ranges: [...e.ranges]
+                          ..removeWhere((element) => element == range))
+                    : e)
+                .toList();
+
+            final updated = current.copyWith(when: when);
+            if (const ListEquality().equals(updated.when, current.when)) {
+              log("Did not delete $range at $weekDay from $environmentId");
+            } else {
+              log("Deleted $range at $weekDay from $environmentId");
+              await _repository.updateEnvironment(
+                  environmentId: environmentId, environment: updated);
+            }
+          });
+
+  /// Adds a rule to the environment.
+  /// TODO : This can obviously be improved when assuming a sorted list...
+  List<TimeRange> _mergeRanges(List<TimeRange> initial, TimeRange added) {
+    var lookup = added;
+
+    // Find intersection
+    final res = <TimeRange>[];
+
+    for (int i = 0; i < initial.length; i++) {
+      final startIncluded = TimeOfDayUtils.included(initial[i].start, lookup);
+      final endIncluded = TimeOfDayUtils.included(initial[i].end, lookup);
+
+      // Added absorbs the time range
+      if (startIncluded && endIncluded) {
+        continue;
+      }
+      // Starting Part of an existing range is included in added range
+      // Combine ranges and finish
+      else if (startIncluded && !endIncluded) {
+        lookup = TimeRange(start: lookup.start, end: initial[i].end);
+      }
+      // Ending Part of an existing range is included in added range
+      // Combine ranges and finish
+      else if (!startIncluded && endIncluded) {
+        lookup = TimeRange(start: initial[i].start, end: lookup.end);
+      }
+      // No overlap, keep looking.
+      else {
+        res.add(initial[i]);
+      }
+    }
+
+    res.add(lookup);
+    return res..sort((a, b) => TimeOfDayUtils.compare(a.start, b.start));
+  }
+
+  Future<void> addRange(
+          {required String environmentId,
+          required int weekDay,
+          required TimeRange range}) async =>
+      await _apply(
+          environmentId: environmentId,
+          callback: (current) async {
+            // TODO : Do not allow overlap of when
+            final when = [...current.when]
+                .map((e) => (e.weekDay == weekDay)
+                    ? DayTimeWindow(
+                        weekDay: weekDay, ranges: _mergeRanges(e.ranges, range))
+                    : e)
+                .toList();
+
+            final updated = current.copyWith(when: when);
+
+            if (const ListEquality().equals(updated.when, current.when)) {
+              log("Did not add $range at $weekDay from $environmentId");
+            } else {
+              log("Added $range at $weekDay from $environmentId");
+              await _repository.updateEnvironment(
+                  environmentId: environmentId, environment: updated);
+            }
+          });
 
   /// Removes a rule from the environment.
   Future<void> removeRule(

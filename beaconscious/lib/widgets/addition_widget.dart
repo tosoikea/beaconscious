@@ -5,13 +5,14 @@ typedef AdditionWidgetBuilder<T extends Object> = Widget Function(
     BuildContext context, ValueNotifier<T?> notifier);
 
 typedef SavedCallback<T extends Object> = Future<void> Function(T saved);
+typedef NotifierCallback<T> = Future<void> Function(ValueNotifier<T?> notifier);
 
 class AdditionWidget<T extends Object> extends StatefulWidget {
   final T? value;
   final AdditionWidgetBuilder<T> builder;
   final SavedCallback<T> onSave;
-  final VoidCallback? onAdd;
-  final VoidCallback? onCancel;
+  final NotifierCallback<T>? onAdd;
+  final NotifierCallback<T>? onCancel;
 
   const AdditionWidget(
       {Key? key,
@@ -55,9 +56,9 @@ class _AdditionWidgetState<T extends Object> extends State<AdditionWidget<T>> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (widget.onAdd != null) {
-                        widget.onAdd!();
+                        await widget.onAdd!(_notifier);
                       }
                       setState(() {
                         _isAdding = true;
@@ -85,9 +86,9 @@ class _AdditionWidgetState<T extends Object> extends State<AdditionWidget<T>> {
                           },
                           icon: const Icon(Icons.check)),
                     IconButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (widget.onCancel != null) {
-                            widget.onCancel!();
+                            await widget.onCancel!(_notifier);
                           }
                           setState(() {
                             _isAdding = false;

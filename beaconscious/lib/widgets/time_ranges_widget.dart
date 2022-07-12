@@ -62,24 +62,41 @@ class TimeRangesWidget extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        height: 16,
-        child: Row(
-          children: _getFilled().map((e) {
-            var difference = TimeOfDayUtils.difference(
-                end: e.range.end, start: e.range.start);
+  Widget build(BuildContext context) => Row(
+        children: _getFilled().map((e) {
+          var difference =
+              TimeOfDayUtils.difference(end: e.range.end, start: e.range.start);
 
-            return Flexible(
-              flex: difference.hour * 60 + difference.minute,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: (e.annotation)
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors.white,
-                    borderRadius: BorderRadius.circular(12)),
-              ),
-            );
-          }).toList(),
-        ),
+          return Flexible(
+            flex: difference.hour * 60 + difference.minute,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // TODO : Change style, only for prototype to work...
+                if (e.annotation && difference.hour > 2)
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(TimeOfDayUtils.getPadded(e.range.start),
+                        style: Theme.of(context).textTheme.labelSmall),
+                  ),
+                Container(
+                  height: 16,
+                  decoration: BoxDecoration(
+                      color: (e.annotation)
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(12)),
+                ),
+                // TODO : Change style, only for prototype to work...
+                if (e.annotation && difference.hour > 2)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(TimeOfDayUtils.getPadded(e.range.end),
+                        style: Theme.of(context).textTheme.labelSmall),
+                  ),
+              ],
+            ),
+          );
+        }).toList(),
       );
 }

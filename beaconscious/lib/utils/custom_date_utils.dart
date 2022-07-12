@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomDateUtils {
-  static String getWeekDayName(BuildContext context, DateTime dateTime) {
-    var weekday = dateTime.weekday;
-
+  static String getWeekDayNameByNumber(BuildContext context, int weekday) {
     switch (weekday) {
       case 1:
         return AppLocalizations.of(context)!.monday;
@@ -24,6 +22,9 @@ class CustomDateUtils {
         throw ArgumentError("$weekday is an unknown weekday.");
     }
   }
+
+  static String getWeekDayName(BuildContext context, DateTime dateTime) =>
+      getWeekDayNameByNumber(context, dateTime.weekday);
 
   static String getWeekDayShortNameByNumber(BuildContext context, int weekday) {
     switch (weekday) {
