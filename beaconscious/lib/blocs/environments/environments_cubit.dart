@@ -18,6 +18,7 @@ typedef EnvironmentDeterminedCallback = Future<void> Function(
 
 class EnvironmentsCubit extends Cubit<EnvironmentsState> {
   final EnvironmentsRepository _repository;
+  late final Timer _refresh;
   late final StreamSubscription<List<Detector>> _detectionSubscription;
   late final StreamSubscription<List<Environment>> _knownSubscription;
   List<Detector> _detected;
@@ -29,24 +30,39 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
         detectionRepository.streamDetected().listen(_onDetectionChanged);
     _knownSubscription =
         _repository.streamEnvironments().listen(_onKnownChanged);
+    _refresh =
+        Timer.periodic(const Duration(seconds: 15), (timer) => _detect());
   }
 
   void _detect() {
+    log("Evaluating environment detection");
     var environments = state.environments.where((element) => !element.disabled);
-    var possible = <Environment>[Environment.empty];
 
     // A) Where
+    final wherePossible = <Environment>[];
     for (var environment in environments) {
       if (environment.where
           .every((outer) => _detected.any((inner) => inner.id == outer))) {
-        possible.add(environment);
+        wherePossible.add(environment);
       }
     }
 
-    // TODO : Add time evaluation
-    log("Detected ${environments.length} environments. Selecting last.");
-    emit(state.copyWith(current: possible.last));
-    log("Changed detection to ${possible.last}");
+    // B) When
+    final now = DateTime.now();
+    final whenPossible = <Environment>[Environment.empty];
+    for (var environment in wherePossible) {
+      if (environment.when
+          .firstWhere((element) => element.weekDay == now.weekday)
+          .ranges
+          .any((range) =>
+              TimeOfDayUtils.included(TimeOfDay.fromDateTime(now), range))) {
+        whenPossible.add(environment);
+      }
+    }
+
+    log("Detected ${whenPossible.length} environments. Selecting last.");
+    emit(state.copyWith(current: whenPossible.last));
+    log("Changed detection to ${whenPossible.last}");
   }
 
   void _onDetectionChanged(List<Detector> detected) {
@@ -285,6 +301,7 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
 
   @override
   Future<void> close() {
+    _refresh.cancel();
     _detectionSubscription.cancel();
     _knownSubscription.cancel();
     return super.close();
