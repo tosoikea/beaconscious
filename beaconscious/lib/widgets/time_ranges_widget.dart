@@ -12,7 +12,6 @@ class _AnnotatedTimeRange<T> {
 class TimeRangesWidget extends StatelessWidget {
   final List<TimeRange> ranges;
 
-  // TODO : Detect unsorted or overlapping time ranges.
   const TimeRangesWidget({super.key, required this.ranges});
 
   TimeOfDay _subtractMinute(TimeOfDay time) {
@@ -85,7 +84,15 @@ class TimeRangesWidget extends StatelessWidget {
                       color: (e.annotation)
                           ? Theme.of(context).colorScheme.primary
                           : Colors.white,
-                      borderRadius: BorderRadius.circular(12)),
+                      borderRadius:
+                          (e.range.start == const TimeOfDay(hour: 0, minute: 0))
+                              ? const BorderRadius.horizontal(
+                                  left: Radius.circular(12))
+                              : (e.range.end ==
+                                      const TimeOfDay(hour: 23, minute: 59))
+                                  ? const BorderRadius.horizontal(
+                                      right: Radius.circular(12))
+                                  : null),
                 ),
                 // TODO : Change style, only for prototype to work...
                 if (e.annotation && difference.hour > 2)
