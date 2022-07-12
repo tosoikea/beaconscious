@@ -126,6 +126,7 @@
   "detection_currently_detected": "Erkannt",
   "detection_currently_not_detected": "Nicht Erkannt",
   "detection_device_bluetooth_name": "Bluetooth-Name",
+  "detection_device_name": "Name",
   "detection_device_bluetooth_strength": "Signalstärke",
   "detection_detector_created_at": "Hinzugefügt am",
   "detection_device" : "Gerät",

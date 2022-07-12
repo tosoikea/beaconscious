@@ -1,7 +1,9 @@
 import 'package:beaconscious/repositories/detection/models/models.dart';
 import 'package:beaconscious/widgets/dialogs/custom_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 typedef DeviceSavedCallback = Future<void> Function(Device saved);
 
@@ -19,19 +21,8 @@ class DetectionDeviceAdditionDialog extends StatefulWidget {
 
 class _DetectionDeviceAdditionDialogState
     extends State<DetectionDeviceAdditionDialog> {
-  late TextEditingController _nameController;
-
-  @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController(text: widget.device.name);
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
+  final _formKey = GlobalKey<FormBuilderState>();
+  bool _nameHasError = false;
 
   @override
   Widget build(BuildContext context) => CustomDialog(
@@ -39,20 +30,55 @@ class _DetectionDeviceAdditionDialogState
             .detection_selection_device_creation_title,
         subtitle:
             AppLocalizations.of(context)!.detection_selection_device_creation,
-        content: TextFormField(
-          controller: _nameController,
+        content: FormBuilder(
+          key: _formKey,
+          onChanged: () {
+            _formKey.currentState!.save();
+          },
+          initialValue: {"name": widget.device.name},
+          child: Column(
+            children: [
+              FormBuilderTextField(
+                autovalidateMode: AutovalidateMode.always,
+                name: 'name',
+                decoration: InputDecoration(
+                  border: const UnderlineInputBorder(),
+                  labelText:
+                      AppLocalizations.of(context)!.detection_device_name,
+                  suffixIcon: _nameHasError
+                      ? Icon(Icons.error,
+                          color: Theme.of(context).colorScheme.error)
+                      : const Icon(Icons.check, color: Colors.green),
+                ),
+                onChanged: (val) {
+                  setState(() {
+                    _nameHasError =
+                        !(_formKey.currentState?.fields['name']?.validate() ??
+                            false);
+                  });
+                },
+                validator: FormBuilderValidators.compose(
+                    [FormBuilderValidators.required()]),
+                textInputAction: TextInputAction.next,
+              ),
+            ],
+          ),
         ),
         actions: <Widget>[
           TextButton(
-              onPressed: () async {
-                await widget
-                    .onSave(widget.device.copyWith(name: _nameController.text))
-                    .whenComplete(() {
-                  if (mounted) {
-                    Navigator.pop(context);
-                  }
-                });
-              },
+              onPressed: _formKey.currentState != null &&
+                      _formKey.currentState!.validate()
+                  ? () async {
+                      await widget
+                          .onSave(widget.device.copyWith(
+                              name: _formKey.currentState!.value["name"]))
+                          .whenComplete(() {
+                        if (mounted) {
+                          Navigator.pop(context);
+                        }
+                      });
+                    }
+                  : null,
               child: Text(AppLocalizations.of(context)!.ok)),
           TextButton(
               onPressed: () => Navigator.pop(context),
