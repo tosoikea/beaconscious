@@ -120,14 +120,16 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
   /// Adds a rule to the environment.
   /// TODO : This can obviously be improved when assuming a sorted list...
   List<TimeRange> _mergeRanges(List<TimeRange> initial, TimeRange added) {
-    var lookup = added;
+    TimeRange? lookup = added;
 
     // Find intersection
     final res = <TimeRange>[];
 
     for (int i = 0; i < initial.length; i++) {
-      final startIncluded = TimeOfDayUtils.included(initial[i].start, lookup);
-      final endIncluded = TimeOfDayUtils.included(initial[i].end, lookup);
+      final startIncluded =
+          lookup != null && TimeOfDayUtils.included(initial[i].start, lookup);
+      final endIncluded =
+          lookup != null && TimeOfDayUtils.included(initial[i].end, lookup);
 
       // Added absorbs the time range
       if (startIncluded && endIncluded) {
@@ -143,13 +145,20 @@ class EnvironmentsCubit extends Cubit<EnvironmentsState> {
       else if (!startIncluded && endIncluded) {
         lookup = TimeRange(start: initial[i].start, end: lookup.end);
       }
-      // No overlap, keep looking.
-      else {
+      // Existing time range absorbs this time range
+      else if (lookup != null &&
+          TimeOfDayUtils.included(lookup.start, initial[i]) &&
+          TimeOfDayUtils.included(lookup.end, initial[i])) {
+        lookup = null;
+        res.add(initial[i]);
+      } else {
         res.add(initial[i]);
       }
     }
 
-    res.add(lookup);
+    if (lookup != null) {
+      res.add(lookup);
+    }
     return res..sort((a, b) => TimeOfDayUtils.compare(a.start, b.start));
   }
 

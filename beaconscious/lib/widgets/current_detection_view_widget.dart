@@ -12,11 +12,9 @@ class CurrentDetectionViewWidget extends StatelessWidget {
       BlocBuilder<DetectionCubit, DetectionState>(builder: (context, state) {
         if (state.detected.isEmpty) {
           return Center(
-              child: Icon(
-            Icons.person,
-            size: 48,
-            color: Theme.of(context).colorScheme.onSecondaryContainer
-          ));
+              child: Icon(Icons.person,
+                  size: 48,
+                  color: Theme.of(context).colorScheme.onSecondaryContainer));
         }
 
         final graph = Graph()..isTree = true;
@@ -27,7 +25,7 @@ class CurrentDetectionViewWidget extends StatelessWidget {
         }
 
         var configuration = BuchheimWalkerConfiguration()
-          ..siblingSeparation = (100)
+          ..siblingSeparation = (25)
           ..levelSeparation = (10)
           ..orientation = (BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM);
         var builder = BuchheimWalkerAlgorithm(

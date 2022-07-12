@@ -16,52 +16,50 @@ class EnvironmentWhenWidget extends StatelessWidget {
         children: environment.when
             .map((e) => Padding(
                   padding: const EdgeInsets.only(top: 10.0),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 32,
-                        child: Center(
-                          child: Text(
-                            CustomDateUtils.getWeekDayShortNameByNumber(
-                                context, e.weekDay),
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge!
-                                .copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSurfaceVariant,
-                                ),
+                  child: GestureDetector(
+                    onTap: () async {
+                      await showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              BlocBuilder<EnvironmentsCubit, EnvironmentsState>(
+                                builder: (context, state) {
+                                  final current = state.environments.firstWhere(
+                                      (element) =>
+                                          element.name == environment.name);
+                                  return EnvironmentDaytimeWindowDialog(
+                                      environment: current,
+                                      window: current.when.firstWhere(
+                                          (element) =>
+                                              element.weekDay == e.weekDay));
+                                },
+                              ));
+                    },
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 32,
+                          child: Center(
+                            child: Text(
+                              CustomDateUtils.getWeekDayShortNameByNumber(
+                                  context, e.weekDay),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge!
+                                  .copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurfaceVariant,
+                                  ),
+                            ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: GestureDetector(
-                            child: TimeRangesWidget(ranges: e.ranges),
-                            onTap: () async {
-                              await showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      BlocBuilder<EnvironmentsCubit,
-                                          EnvironmentsState>(
-                                        builder: (context, state) {
-                                          final current = state.environments
-                                              .firstWhere((element) =>
-                                                  element.name ==
-                                                  environment.name);
-                                          return EnvironmentDaytimeWindowDialog(
-                                              environment: current,
-                                              window: current.when.firstWhere(
-                                                  (element) =>
-                                                      element.weekDay ==
-                                                      e.weekDay));
-                                        },
-                                      ));
-                            }),
-                      )),
-                    ],
+                        Expanded(
+                            child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: TimeRangesWidget(ranges: e.ranges),
+                        )),
+                      ],
+                    ),
                   ),
                 ))
             .toList(),

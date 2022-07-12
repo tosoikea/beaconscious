@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:beaconscious/constants.dart';
 import 'package:beaconscious/repositories/environments/environments_repository.dart';
 import 'package:beaconscious/repositories/environments/models/day_time_window.dart';
 import 'package:beaconscious/repositories/environments/models/models.dart';
+import 'package:beaconscious/repositories/environments/models/rules/restricted_app_usage_rule.dart';
 import 'package:flutter/material.dart';
 
 class LocalEnvironmentsRepository extends EnvironmentsRepository {
@@ -12,22 +14,148 @@ class LocalEnvironmentsRepository extends EnvironmentsRepository {
   LocalEnvironmentsRepository()
       : _environments = <String, Environment>{},
         _knownController = StreamController<List<Environment>>() {
-    _environments["Home Office"] = Environment(
+    /// DUMMY VALUES FOR PROTOTYPING
+    _environments["Freizeit"] = Environment(
         disabled: false,
-        icon: Icons.business_center,
-        name: "Home Office",
-        where: const <String>[],
-        what: const <Rule>[DoNotDisturbRule()],
-        when: List.generate(
-            7,
-            (index) => DayTimeWindow(weekDay: index + 1, ranges: [
-                  TimeRange(
-                      start: const TimeOfDay(hour: 7, minute: 0),
-                      end: const TimeOfDay(hour: 12, minute: 0)),
-                  TimeRange(
-                      start: const TimeOfDay(hour: 14, minute: 0),
-                      end: const TimeOfDay(hour: 16, minute: 0))
-                ])));
+        icon: Icons.chair,
+        name: "Freizeit",
+        where: const <String>[
+          /// BEA0001 ID in Firebease, automatisch generiert
+          "caOzLnr49dQR5eOjKKHB"
+        ],
+        what: const <Rule>[
+          RestrictedAppUsageRule(
+              applications: [Constants.instagram, Constants.outlook]),
+          DisabledAppNotificationsRule(applications: [Constants.outlook])
+        ],
+        when: [
+          DayTimeWindow(weekDay: 1, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 12, minute: 00),
+                end: const TimeOfDay(hour: 13, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 18, minute: 00),
+                end: const TimeOfDay(hour: 20, minute: 00)),
+          ]),
+          DayTimeWindow(weekDay: 2, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 12, minute: 00),
+                end: const TimeOfDay(hour: 13, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 18, minute: 00),
+                end: const TimeOfDay(hour: 20, minute: 00)),
+          ]),
+          DayTimeWindow(weekDay: 3, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 12, minute: 00),
+                end: const TimeOfDay(hour: 13, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 18, minute: 00),
+                end: const TimeOfDay(hour: 20, minute: 00)),
+          ]),
+          DayTimeWindow(weekDay: 4, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 12, minute: 00),
+                end: const TimeOfDay(hour: 13, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 18, minute: 00),
+                end: const TimeOfDay(hour: 20, minute: 00)),
+          ]),
+          DayTimeWindow(weekDay: 5, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 12, minute: 00),
+                end: const TimeOfDay(hour: 13, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 18, minute: 00),
+                end: const TimeOfDay(hour: 20, minute: 00)),
+          ]),
+          DayTimeWindow(weekDay: 6, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 8, minute: 00),
+                end: const TimeOfDay(hour: 20, minute: 00)),
+          ]),
+          DayTimeWindow(weekDay: 7, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 8, minute: 00),
+                end: const TimeOfDay(hour: 20, minute: 00)),
+          ])
+        ]);
+
+    _environments["Schlafen"] = Environment(
+        disabled: false,
+        icon: Icons.bedtime,
+        name: "Schlafen",
+        where: const <String>[
+          /// BEA0001 ID in Firebease, automatisch generiert
+          "89wJ7ijdDS1zUaBAMfMu"
+        ],
+        what: const <Rule>[
+          DoNotDisturbRule(),
+          DisabledAppNotificationsRule(applications: [
+            Constants.outlook,
+            Constants.instagram,
+            Constants.tiktok,
+            Constants.whatsapp
+          ])
+        ],
+        when: [
+          DayTimeWindow(weekDay: 1, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 0, minute: 00),
+                end: const TimeOfDay(hour: 5, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 20, minute: 30),
+                end: const TimeOfDay(hour: 23, minute: 59)),
+          ]),
+          DayTimeWindow(weekDay: 2, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 0, minute: 00),
+                end: const TimeOfDay(hour: 5, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 20, minute: 30),
+                end: const TimeOfDay(hour: 23, minute: 59)),
+          ]),
+          DayTimeWindow(weekDay: 3, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 0, minute: 00),
+                end: const TimeOfDay(hour: 5, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 20, minute: 30),
+                end: const TimeOfDay(hour: 23, minute: 59)),
+          ]),
+          DayTimeWindow(weekDay: 4, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 0, minute: 00),
+                end: const TimeOfDay(hour: 5, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 20, minute: 30),
+                end: const TimeOfDay(hour: 23, minute: 59)),
+          ]),
+          DayTimeWindow(weekDay: 5, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 0, minute: 00),
+                end: const TimeOfDay(hour: 5, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 20, minute: 30),
+                end: const TimeOfDay(hour: 23, minute: 59)),
+          ]),
+          DayTimeWindow(weekDay: 6, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 0, minute: 00),
+                end: const TimeOfDay(hour: 7, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 22, minute: 00),
+                end: const TimeOfDay(hour: 23, minute: 59)),
+          ]),
+          DayTimeWindow(weekDay: 7, ranges: [
+            TimeRange(
+                start: const TimeOfDay(hour: 0, minute: 00),
+                end: const TimeOfDay(hour: 8, minute: 00)),
+            TimeRange(
+                start: const TimeOfDay(hour: 20, minute: 30),
+                end: const TimeOfDay(hour: 23, minute: 59)),
+          ])
+        ]);
 
     _updateEnvironments();
   }
