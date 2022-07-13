@@ -141,5 +141,5 @@
   "analysis_title": "Übersicht",
   "info_environment": "Ein Environment setzt sich aus dem Wo und Wann zusammen. Das Wo gibst du durch die Geräte oder Orte an, bei denen du dich befindest. Beim Wann gibst du Start- und Endzeiten für das Environment an. Zusätzlich kannst du Effekte definieren, die automatisch ausgelöst werden, sobald das Environment aktiv ist.",
   "info_detection": "Du kannst Environments abhängig davon festlegen wo du dich befindest. Das Wo können hierbei Geräte oder Orte sein. Environments werden dann beispielsweise erkannt, wenn du dich in der Nähe dieser Geräte oder Orte befindest. Hierfür müssen die zu erkennenden Geräte oder Orte von dir in der Anwendung hinterlegt werden.",
-  "info_analysis": " In der Übersicht kannst du dir anzeigen lassen, wie sich deine Zeit in den einzelnen Environments verändert hat. Hierfür kannst du zwischen einer Tages-, Wochen- und Monatsübersicht wechseln."
+  "info_analysis": "In der Übersicht kannst du dir anzeigen lassen, wie sich deine Zeit in den einzelnen Environments verändert hat. Hierfür kannst du zwischen einer Tages-, Wochen- und Monatsübersicht wechseln."
 }

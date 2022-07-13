@@ -21,7 +21,7 @@ class LocalEnvironmentsRepository extends EnvironmentsRepository {
         name: "Freizeit",
         where: const <String>[
           /// BEA0001 ID in Firebease, automatisch generiert
-          "PMwSxn4NyrjvXvoj7WAq"
+          "nOygtKCJ12Ye2XZvcWg2"
         ],
         what: const <Rule>[
           RestrictedAppUsageRule(
