@@ -35,7 +35,6 @@ class _DetectionDeviceAdditionDialogState
           onChanged: () {
             _formKey.currentState!.save();
           },
-          initialValue: {"name": widget.device.name},
           child: Column(
             children: [
               FormBuilderTextField(

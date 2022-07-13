@@ -31,52 +31,37 @@ class LocalEnvironmentsRepository extends EnvironmentsRepository {
         when: [
           DayTimeWindow(weekDay: 1, ranges: [
             TimeRange(
-                start: const TimeOfDay(hour: 12, minute: 00),
-                end: const TimeOfDay(hour: 13, minute: 00)),
-            TimeRange(
-                start: const TimeOfDay(hour: 18, minute: 00),
-                end: const TimeOfDay(hour: 20, minute: 00)),
+                start: const TimeOfDay(hour: 8, minute: 00),
+                end: const TimeOfDay(hour: 18, minute: 00)),
           ]),
           DayTimeWindow(weekDay: 2, ranges: [
             TimeRange(
-                start: const TimeOfDay(hour: 12, minute: 00),
-                end: const TimeOfDay(hour: 13, minute: 00)),
-            TimeRange(
-                start: const TimeOfDay(hour: 18, minute: 00),
-                end: const TimeOfDay(hour: 20, minute: 00)),
+                start: const TimeOfDay(hour: 8, minute: 00),
+                end: const TimeOfDay(hour: 18, minute: 00)),
           ]),
           DayTimeWindow(weekDay: 3, ranges: [
             TimeRange(
-                start: const TimeOfDay(hour: 12, minute: 00),
-                end: const TimeOfDay(hour: 13, minute: 00)),
-            TimeRange(
-                start: const TimeOfDay(hour: 18, minute: 00),
-                end: const TimeOfDay(hour: 20, minute: 00)),
+                start: const TimeOfDay(hour: 8, minute: 00),
+                end: const TimeOfDay(hour: 18, minute: 00)),
           ]),
           DayTimeWindow(weekDay: 4, ranges: [
             TimeRange(
-                start: const TimeOfDay(hour: 12, minute: 00),
-                end: const TimeOfDay(hour: 13, minute: 00)),
-            TimeRange(
-                start: const TimeOfDay(hour: 18, minute: 00),
-                end: const TimeOfDay(hour: 20, minute: 00)),
+                start: const TimeOfDay(hour: 8, minute: 00),
+                end: const TimeOfDay(hour: 18, minute: 00)),
           ]),
           DayTimeWindow(weekDay: 5, ranges: [
             TimeRange(
-                start: const TimeOfDay(hour: 12, minute: 00),
-                end: const TimeOfDay(hour: 13, minute: 00)),
-            TimeRange(
-                start: const TimeOfDay(hour: 18, minute: 00),
-                end: const TimeOfDay(hour: 20, minute: 00)),
+                start: const TimeOfDay(hour: 8, minute: 00),
+                end: const TimeOfDay(hour: 18, minute: 00)),
           ]),
           DayTimeWindow(weekDay: 6, ranges: [
             TimeRange(
-                start: const TimeOfDay(hour: 8, minute: 00),
+                start: const TimeOfDay(hour: 4, minute: 00),
                 end: const TimeOfDay(hour: 20, minute: 00)),
           ]),
           DayTimeWindow(weekDay: 7, ranges: [
             TimeRange(
-                start: const TimeOfDay(hour: 8, minute: 00),
+                start: const TimeOfDay(hour: 4, minute: 00),
                 end: const TimeOfDay(hour: 20, minute: 00)),
           ])
         ]);
