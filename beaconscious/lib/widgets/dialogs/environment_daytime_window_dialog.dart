@@ -5,18 +5,63 @@ import 'package:beaconscious/utils/custom_date_utils.dart';
 import 'package:beaconscious/utils/time_of_day_utils.dart';
 import 'package:beaconscious/widgets/addition_widget.dart';
 import 'package:beaconscious/widgets/dialogs/custom_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:time_range_picker/time_range_picker.dart' as picker;
+import 'package:form_builder_validators/form_builder_validators.dart';
 
-class EnvironmentDaytimeWindowDialog extends StatelessWidget {
+class EnvironmentDaytimeWindowDialog extends StatefulWidget {
   final Environment environment;
   final DayTimeWindow window;
 
   const EnvironmentDaytimeWindowDialog(
       {Key? key, required this.environment, required this.window})
       : super(key: key);
+
+  @override
+  State<EnvironmentDaytimeWindowDialog> createState() =>
+      _EnvironmentDaytimeWindowDialogState();
+}
+
+class _EnvironmentDaytimeWindowDialogState
+    extends State<EnvironmentDaytimeWindowDialog> {
+  final _formKey = GlobalKey<FormBuilderState>();
+  DateTime _start = DateTime(
+      DateTime.now().year, DateTime.now().month, DateTime.now().day, 12);
+  DateTime _end = DateTime(
+      DateTime.now().year, DateTime.now().month, DateTime.now().day, 13);
+  bool _startHasError = false;
+  bool _endHasError = false;
+
+  FormFieldValidator<DateTime> min({
+    required String name,
+  }) =>
+      (valueCandidate) => valueCandidate != null &&
+              (_formKey.currentState!.value[name] == null ||
+                  valueCandidate
+                      .isAfter(_formKey.currentState!.value[name] as DateTime))
+          ? null
+          : "";
+
+  void _verifyUpdate(ValueNotifier<TimeRange?> notifier) {
+    if (_formKey.currentState?.validate() ?? false) {
+      notifier.value = TimeRange(
+          start: TimeOfDay.fromDateTime(
+              _formKey.currentState!.value["start"] as DateTime),
+          end: TimeOfDay.fromDateTime(
+              _formKey.currentState!.value["end"] as DateTime));
+    }
+
+    setState(() {
+      _startHasError =
+          !(_formKey.currentState?.fields['start']?.validate() ?? false);
+
+      _endHasError =
+          !(_formKey.currentState?.fields['end']?.validate() ?? false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) => CustomDialog(
@@ -26,72 +71,107 @@ class EnvironmentDaytimeWindowDialog extends StatelessWidget {
                 child: Text(AppLocalizations.of(context)!.close))
           ],
           title: AppLocalizations.of(context)!.environment_daytime_window_title(
-              CustomDateUtils.getWeekDayNameByNumber(context, window.weekDay)),
+              CustomDateUtils.getWeekDayNameByNumber(
+                  context, widget.window.weekDay)),
           content: Column(
             children: [
-              ...window.ranges.map(
+              ...widget.window.ranges.map(
                 (e) => _EnvironmentTimeRangeWidget(
-                  environment: environment,
-                  window: window,
+                  environment: widget.environment,
+                  window: widget.window,
                   range: e,
                   readOnly: false,
                 ),
               ),
               AdditionWidget<TimeRange>(
-                onSave: (range) async {
-                  await BlocProvider.of<EnvironmentsCubit>(context).addRange(
-                      environmentId: environment.name,
-                      weekDay: window.weekDay,
-                      range: range);
-                },
-                builder: (context, state) {
-                  if (state.value == null) {
-                    return Container();
-                  }
-
-                  return _EnvironmentTimeRangeWidget(
-                    environment: environment,
-                    window: window,
-                    range: state.value!,
-                    readOnly: true,
-                  );
-                },
                 onAdd: (notifier) async {
-                  final result = await picker.showTimeRangePicker(
-                      context: context,
-                      strokeWidth: 4,
-                      ticks: 12,
-                      ticksOffset: 2,
-                      ticksLength: 8,
-                      handlerRadius: 8,
-                      ticksColor: Colors.grey,
-                      rotateLabels: false,
-                      labelOffset: 30,
-                      padding: 55,
-                      labelStyle: Theme.of(context).textTheme.labelSmall,
-                      clockRotation: 180.0,
-                      labels: [
-                        "24 h",
-                        "3 h",
-                        "6 h",
-                        "9 h",
-                        "12 h",
-                        "15 h",
-                        "18 h",
-                        "21 h"
-                      ].asMap().entries.map((e) {
-                        return picker.ClockLabel.fromIndex(
-                            idx: e.key, length: 8, text: e.value);
-                      }).toList(),
-                      disabledTime: picker.TimeRange(
-                          startTime: const TimeOfDay(hour: 23, minute: 55),
-                          endTime: const TimeOfDay(hour: 0, minute: 0)));
-
-                  if (result != null) {
-                    final range = result as picker.TimeRange;
-                    notifier.value =
-                        TimeRange(start: range.startTime, end: range.endTime);
-                  }
+                  _start = DateTime(1, 1, 1, 12);
+                  _end = DateTime(1, 1, 1, 13);
+                  notifier.value = TimeRange(
+                      start: TimeOfDay.fromDateTime(_start),
+                      end: TimeOfDay.fromDateTime(_end));
+                },
+                onSave: _formKey.currentState != null &&
+                        _formKey.currentState!.validate()
+                    ? (range) async {
+                        await BlocProvider.of<EnvironmentsCubit>(context)
+                            .addRange(
+                                environmentId: widget.environment.name,
+                                weekDay: widget.window.weekDay,
+                                range: range);
+                      }
+                    : null,
+                builder: (context, state) {
+                  return FormBuilder(
+                      autovalidateMode: AutovalidateMode.always,
+                      onChanged: () {
+                        _formKey.currentState!.save();
+                      },
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          FormBuilderDateTimePicker(
+                            name: 'start',
+                            resetIcon: null,
+                            autovalidateMode: AutovalidateMode.always,
+                            validator: FormBuilderValidators.compose(
+                                [FormBuilderValidators.required()]),
+                            decoration: InputDecoration(
+                              border: const UnderlineInputBorder(),
+                              labelText: AppLocalizations.of(context)!
+                                  .environment_daytime_window_start,
+                              suffixIcon: _startHasError
+                                  ? Icon(Icons.error,
+                                      color:
+                                          Theme.of(context).colorScheme.error)
+                                  : const Icon(Icons.check,
+                                      color: Colors.green),
+                            ),
+                            timePickerInitialEntryMode:
+                                TimePickerEntryMode.input,
+                            inputType: InputType.time,
+                            initialValue: DateTime(
+                                1,
+                                1,
+                                1,
+                                state.value!.start.hour,
+                                state.value!.start.minute),
+                            onChanged: (val) {
+                              _start = val!;
+                              _verifyUpdate(state);
+                            },
+                          ),
+                          FormBuilderDateTimePicker(
+                            name: 'end',
+                            resetIcon: null,
+                            autovalidateMode: AutovalidateMode.always,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              min(name: "start")
+                            ]),
+                            decoration: InputDecoration(
+                              border: const UnderlineInputBorder(),
+                              labelText: AppLocalizations.of(context)!
+                                  .environment_daytime_window_end,
+                              suffixIcon: _endHasError
+                                  ? Icon(Icons.error,
+                                      color:
+                                          Theme.of(context).colorScheme.error)
+                                  : const Icon(Icons.check,
+                                      color: Colors.green),
+                            ),
+                            timePickerInitialEntryMode:
+                                TimePickerEntryMode.input,
+                            inputType: InputType.time,
+                            initialValue: DateTime(1, 1, 1,
+                                state.value!.end.hour, state.value!.end.minute),
+                            onChanged: (val) {
+                              _end = val!;
+                              _verifyUpdate(state);
+                            },
+                          )
+                        ],
+                      ));
                 },
               )
             ],

@@ -10,7 +10,7 @@ typedef NotifierCallback<T> = Future<void> Function(ValueNotifier<T?> notifier);
 class AdditionWidget<T extends Object> extends StatefulWidget {
   final T? value;
   final AdditionWidgetBuilder<T> builder;
-  final SavedCallback<T> onSave;
+  final SavedCallback<T>? onSave;
   final NotifierCallback<T>? onAdd;
   final NotifierCallback<T>? onCancel;
 
@@ -19,7 +19,7 @@ class AdditionWidget<T extends Object> extends StatefulWidget {
       this.onAdd,
       this.onCancel,
       this.value,
-      required this.onSave,
+      this.onSave,
       required this.builder})
       : super(key: key);
 
@@ -77,13 +77,15 @@ class _AdditionWidgetState<T extends Object> extends State<AdditionWidget<T>> {
                   children: [
                     if (_notifier.value != null)
                       IconButton(
-                          onPressed: () async {
-                            await widget.onSave(_notifier.value!);
-                            setState(() {
-                              _isAdding = false;
-                              _notifier.value = null;
-                            });
-                          },
+                          onPressed: (widget.onSave != null)
+                              ? () async {
+                                  await widget.onSave!(_notifier.value!);
+                                  setState(() {
+                                    _isAdding = false;
+                                    _notifier.value = null;
+                                  });
+                                }
+                              : null,
                           icon: const Icon(Icons.check)),
                     IconButton(
                         onPressed: () async {
