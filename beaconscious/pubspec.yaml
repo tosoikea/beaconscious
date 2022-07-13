@@ -32,9 +32,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
   # Defines ==, toString(), hashCode etc. based on supplied properties. Very important for states.
@@ -65,7 +62,6 @@ dependencies:
   # Environment Creation
   flutter_form_builder: ^7.3.1
   form_builder_validators: ^8.2.0
-
 
 dev_dependencies:
   flutter_test:

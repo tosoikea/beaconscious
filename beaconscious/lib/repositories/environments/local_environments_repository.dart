@@ -21,7 +21,7 @@ class LocalEnvironmentsRepository extends EnvironmentsRepository {
         name: "Freizeit",
         where: const <String>[
           /// BEA0001 ID in Firebease, automatisch generiert
-          "caOzLnr49dQR5eOjKKHB"
+          "PMwSxn4NyrjvXvoj7WAq"
         ],
         what: const <Rule>[
           RestrictedAppUsageRule(
@@ -86,7 +86,7 @@ class LocalEnvironmentsRepository extends EnvironmentsRepository {
         icon: Icons.bedtime,
         name: "Schlafen",
         where: const <String>[
-          /// BEA0001 ID in Firebease, automatisch generiert
+          /// BEA0002 ID in Firebease, automatisch generiert
           "89wJ7ijdDS1zUaBAMfMu"
         ],
         what: const <Rule>[
