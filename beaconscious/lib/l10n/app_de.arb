@@ -1,0 +1,145 @@
+{
+  "understood": "Verstanden",
+  "disable": "Deaktivieren",
+  "enable": "Aktivieren",
+  "delete": "Löschen",
+  "cancel": "Abbrechen",
+  "close": "Schließen",
+  "ok": "OK",
+  "and": "und",
+  "day": "Tag",
+  "week": "Woche",
+  "monday": "Montag",
+  "tuesday": "Dienstag",
+  "wednesday": "Mittwoch",
+  "thursday": "Donnerstag",
+  "friday": "Freitag",
+  "saturday": "Samstag",
+  "sunday": "Sonntag",
+  "monday_short": "Mo",
+  "tuesday_short": "Di",
+  "wednesday_short": "Mi",
+  "thursday_short": "Do",
+  "friday_short": "Fr",
+  "saturday_short": "Sa",
+  "sunday_short": "So",
+  "month": "Monat",
+  "environment_card_title" : "Aktuelles Environment",
+  "environment_card_unknown" : "Kein Environment erkannt",
+  "detection_card_title" : "Erkennung",
+  "detection_card_caption_title" : "In der Nähe von",
+  "detection_close_device_zero" : "keinem Gerät",
+  "detection_close_location_zero" : "keinem Ort",
+  "detection_close_device_singular" : "einem Gerät",
+  "detection_close_location_singular" : "einem Ort",
+  "detection_close_device_plural" : "{amount} Geräten",
+  "@detection_close_device_plural": {
+    "placeholders": {
+      "amount" : {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "detection_close_location_plural": "{amount} Orten",
+  "@detection_close_location_plural": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "analysis_card_title": "Wochenübersicht",
+  "analysis_card_unknown" : "Keine Übersicht verfügbar",
+  "analysis_card_caption_title": "Heute",
+  "analysis_card_caption_hour": "eine Stunde",
+  "analysis_card_caption_hours": "{amount} Stunden",
+  "@analysis_card_caption_hours": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "analysis_card_caption_minute" : "eine Minute",
+  "analysis_card_caption_minutes" : "{amount} Minuten",
+  "@analysis_card_caption_minutes": {
+    "placeholders": {
+      "amount" : {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "analysis_card_caption_environment" : "in dem Environment {environment}",
+  "@analysis_card_caption_environment": {
+    "placeholders": {
+      "environment" : {
+        "type": "String",
+        "example": "Home Office"
+      }
+    }
+  },
+  "environments_title": "Environments",
+  "environments_currently_disabled": "Aktuell deaktiviert",
+  "environments_currently_active": "Aktuell aktiv",
+  "environments_previously_active": "Zuletzt {day} aktiv",
+  "@environments_previously_active": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "heute"
+      }
+    }
+  },
+  "environments_delete": "Soll das Environment {name} wirklich gelöscht werden? Das Löschen kann nicht rückgängig gemacht werden.",
+  "@environments_delete": {
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Home Office"
+      }
+    }
+  },
+  "environments_where": "Wo?",
+  "environments_when": "Wann?",
+  "environments_what": "Was?",
+  "environments_rule_do_not_disturb": "Nicht-Stören-Modus",
+  "environments_rule_do_not_disturb_description": "Lautlose Benachrichtigungen",
+  "environments_rule_no_app_notification": "Keine App-Benachrichtigungen",
+  "environments_rule_restricted_app_usage": "Eingeschränkte App-Nutzung",
+  "environment_addition_name": "Name des Environment",
+  "environment_addition_icon": "Icon des Environment",
+  "environment_addition_title": "Neues Environment",
+  "environment_daytime_window_title": "Aktivierungen am {day}",
+  "@environment_daytime_window_title": {
+    "placeholders": {
+      "day": {
+        "type": "String",
+        "example": "Montag"
+      }
+    }
+  },
+  "environment_daytime_window_start": "Beginn der Aktivierung",
+  "environment_daytime_window_end": "Ende der Aktivierung",
+  "detection_title": "Erkennung",
+  "detection_currently_detected": "Erkannt",
+  "detection_currently_not_detected": "Nicht Erkannt",
+  "detection_device_bluetooth_name": "Bluetooth-Name",
+  "detection_device_name": "Name",
+  "detection_device_bluetooth_strength": "Signalstärke",
+  "detection_detector_created_at": "Hinzugefügt am",
+  "detection_device" : "Gerät",
+  "detection_location" : "Ort",
+  "detection_selection_title" : "Auswahl",
+  "detection_selection_type": "Bitte wähle den Erkennungstyp aus, den du hinzufügen möchtest.",
+  "detection_selection_device_selection": "Bitte wähle das Bluetooth-Gerät aus, das du hinzufügen möchtest.",
+  "detection_selection_device_creation_title" : "Neues Bluetooth-Gerät",
+  "detection_selection_device_creation": "Bitte gebe einen Namen für das Bluetooth-Gerät ein.",
+  "analysis_title": "Übersicht",
+  "info_environment": "Ein Environment setzt sich aus dem Wo und Wann zusammen. Das Wo gibst du durch die Geräte oder Orte an, bei denen du dich befindest. Beim Wann gibst du Start- und Endzeiten für das Environment an. Zusätzlich kannst du Effekte definieren, die automatisch ausgelöst werden, sobald das Environment aktiv ist.",
+  "info_detection": "Du kannst Environments abhängig davon festlegen wo du dich befindest. Das Wo können hierbei Geräte oder Orte sein. Environments werden dann beispielsweise erkannt, wenn du dich in der Nähe dieser Geräte oder Orte befindest. Hierfür müssen die zu erkennenden Geräte oder Orte von dir in der Anwendung hinterlegt werden.",
+  "info_analysis": " In der Übersicht kannst du dir anzeigen lassen, wie sich deine Zeit in den einzelnen Environments verändert hat. Hierfür kannst du zwischen einer Tages-, Wochen- und Monatsübersicht wechseln."
+}
