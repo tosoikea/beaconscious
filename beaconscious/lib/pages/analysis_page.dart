@@ -71,7 +71,7 @@ class _AnalysisPageWidgetState extends State<_AnalysisPageWidget>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(vsync: this, length: 3);
+    _tabController = TabController(vsync: this, length: 3, initialIndex: 1);
 
     // Update internal state after tab changed
     _tabController!.addListener(() {
@@ -91,10 +91,9 @@ class _AnalysisPageWidgetState extends State<_AnalysisPageWidget>
               onPressed: () async => await showDialog(
                   context: context,
                   builder: (BuildContext context) => InfoDialog(
-                      title: AppLocalizations.of(context)!
-                          .analysis_title,
-                      description: AppLocalizations.of(context)!
-                          .info_analysis)),
+                      title: AppLocalizations.of(context)!.analysis_title,
+                      description:
+                          AppLocalizations.of(context)!.info_analysis)),
               icon: Icon(
                   color: Theme.of(context).primaryColor, Icons.info_outlined))
         ],
