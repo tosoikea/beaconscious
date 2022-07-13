@@ -25,57 +25,63 @@ class _DetectorWidgetState extends State<DetectorWidget> {
   @override
   Widget build(BuildContext context) {
     if (!expanded) {
-      return CustomCard(
-        leading: widget.detector.accept(DetectorIconVisitor(), context),
-        title: widget.detector.name,
-        subtitle: (widget.active)
-            ? AppLocalizations.of(context)!.detection_currently_detected
-            : AppLocalizations.of(context)!.detection_currently_not_detected,
-        subtitleColor: (widget.active)
-            ? Constants.primary50
-            : Theme.of(context).colorScheme.tertiary,
-        action: IconButton(
-          onPressed: () => setState(() {
-            expanded = true;
-          }),
-          icon: const Icon(Icons.arrow_drop_down_rounded),
+      return GestureDetector(
+        onTap: () => setState(() {
+          expanded = true;
+        }),
+        child: CustomCard(
+          leading: widget.detector.accept(DetectorIconVisitor(), context),
+          title: widget.detector.name,
+          subtitle: (widget.active)
+              ? AppLocalizations.of(context)!.detection_currently_detected
+              : AppLocalizations.of(context)!.detection_currently_not_detected,
+          subtitleColor: (widget.active)
+              ? Constants.primary50
+              : Theme.of(context).colorScheme.tertiary,
+          action: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Icon(Icons.arrow_drop_down_rounded),
+          ),
         ),
       );
     } else {
-      return CustomCard(
-        backgroundColor: Constants.primary80,
-        leading: widget.detector.accept(DetectorIconVisitor(), context),
-        title: widget.detector.name,
-        subtitle: (widget.active)
-            ? AppLocalizations.of(context)!.detection_currently_detected
-            : AppLocalizations.of(context)!.detection_currently_not_detected,
-        subtitleColor: (widget.active)
-            ? Constants.primary50
-            : Theme.of(context).colorScheme.tertiary,
-        content: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child:
-                widget.detector.accept(DetectorDescriptionVisitor(), context)),
-        caption: Row(
-          children: [
-            const Spacer(),
-            MaterialButton(
-                onPressed: () async =>
-                    await BlocProvider.of<DetectionCubit>(context)
-                        .removeDetector(detector: widget.detector),
-                child: Row(
-                  children: [
-                    const Icon(Icons.delete),
-                    Text(AppLocalizations.of(context)!.delete)
-                  ],
-                ))
-          ],
-        ),
-        action: IconButton(
-          onPressed: () => setState(() {
-            expanded = false;
-          }),
-          icon: const Icon(Icons.arrow_drop_up_rounded),
+      return GestureDetector(
+        onTap: () => setState(() {
+          expanded = false;
+        }),
+        child: CustomCard(
+          backgroundColor: Constants.primary80,
+          leading: widget.detector.accept(DetectorIconVisitor(), context),
+          title: widget.detector.name,
+          subtitle: (widget.active)
+              ? AppLocalizations.of(context)!.detection_currently_detected
+              : AppLocalizations.of(context)!.detection_currently_not_detected,
+          subtitleColor: (widget.active)
+              ? Constants.primary50
+              : Theme.of(context).colorScheme.tertiary,
+          content: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: widget.detector
+                  .accept(DetectorDescriptionVisitor(), context)),
+          caption: Row(
+            children: [
+              const Spacer(),
+              MaterialButton(
+                  onPressed: () async =>
+                      await BlocProvider.of<DetectionCubit>(context)
+                          .removeDetector(detector: widget.detector),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.delete),
+                      Text(AppLocalizations.of(context)!.delete)
+                    ],
+                  ))
+            ],
+          ),
+          action: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Icon(Icons.arrow_drop_up_rounded),
+          ),
         ),
       );
     }

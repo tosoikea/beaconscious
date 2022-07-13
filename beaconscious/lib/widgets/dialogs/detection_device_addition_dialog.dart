@@ -22,7 +22,7 @@ class DetectionDeviceAdditionDialog extends StatefulWidget {
 class _DetectionDeviceAdditionDialogState
     extends State<DetectionDeviceAdditionDialog> {
   final _formKey = GlobalKey<FormBuilderState>();
-  bool _nameHasError = false;
+  bool _nameHasError = true;
 
   @override
   Widget build(BuildContext context) => CustomDialog(

@@ -25,25 +25,29 @@ class _EnvironmentWidgetState extends State<EnvironmentWidget> {
       BlocBuilder<EnvironmentsCubit, EnvironmentsState>(
           builder: (context, state) {
         if (!expanded) {
-          return CustomCard(
-            leading: widget.environment.icon,
-            leadingBackgroundColor: (widget.environment.disabled)
-                ? Theme.of(context).colorScheme.tertiary
-                : null,
-            title: widget.environment.name,
-            //TODO : Determine the actual day (e.g. gestern, etc.)
-            subtitle:
-                EnvironmentUtils.getStatus(context, widget.environment, state),
-            subtitleColor: EnvironmentUtils.isActive(widget.environment, state)
-                ? Constants.primary50
-                : (widget.environment.disabled)
-                    ? Theme.of(context).colorScheme.tertiary
-                    : null,
-            action: IconButton(
-              onPressed: () => setState(() {
-                expanded = true;
-              }),
-              icon: const Icon(Icons.arrow_drop_down_rounded),
+          return GestureDetector(
+            onTap: () => setState(() {
+              expanded = true;
+            }),
+            child: CustomCard(
+              leading: widget.environment.icon,
+              leadingBackgroundColor: (widget.environment.disabled)
+                  ? Theme.of(context).colorScheme.tertiary
+                  : null,
+              title: widget.environment.name,
+              //TODO : Determine the actual day (e.g. gestern, etc.)
+              subtitle: EnvironmentUtils.getStatus(
+                  context, widget.environment, state),
+              subtitleColor:
+                  EnvironmentUtils.isActive(widget.environment, state)
+                      ? Constants.primary50
+                      : (widget.environment.disabled)
+                          ? Theme.of(context).colorScheme.tertiary
+                          : null,
+              action: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Icon(Icons.arrow_drop_down_rounded),
+              ),
             ),
           );
         } else {
@@ -56,27 +60,30 @@ class _EnvironmentWidgetState extends State<EnvironmentWidget> {
                   environment: widget.environment,
                 ),
               ),
-              CustomCard(
-                backgroundColor: Constants.primary80,
-                leading: widget.environment.icon,
-                leadingBackgroundColor: (widget.environment.disabled)
-                    ? Theme.of(context).colorScheme.tertiary
-                    : null,
-                title: widget.environment.name,
-                //TODO : Determine the actual day (e.g. gestern, etc.)
-                subtitle: EnvironmentUtils.getStatus(
-                    context, widget.environment, state),
-                subtitleColor:
-                    EnvironmentUtils.isActive(widget.environment, state)
-                        ? Theme.of(context).colorScheme.primary
-                        : (widget.environment.disabled)
-                            ? Theme.of(context).colorScheme.tertiary
-                            : null,
-                action: IconButton(
-                  onPressed: () => setState(() {
-                    expanded = false;
-                  }),
-                  icon: const Icon(Icons.arrow_drop_up_rounded),
+              GestureDetector(
+                onTap: () => setState(() {
+                  expanded = false;
+                }),
+                child: CustomCard(
+                  backgroundColor: Constants.primary80,
+                  leading: widget.environment.icon,
+                  leadingBackgroundColor: (widget.environment.disabled)
+                      ? Theme.of(context).colorScheme.tertiary
+                      : null,
+                  title: widget.environment.name,
+                  //TODO : Determine the actual day (e.g. gestern, etc.)
+                  subtitle: EnvironmentUtils.getStatus(
+                      context, widget.environment, state),
+                  subtitleColor:
+                      EnvironmentUtils.isActive(widget.environment, state)
+                          ? Theme.of(context).colorScheme.primary
+                          : (widget.environment.disabled)
+                              ? Theme.of(context).colorScheme.tertiary
+                              : null,
+                  action: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Icon(Icons.arrow_drop_up_rounded),
+                  ),
                 ),
               )
             ],
