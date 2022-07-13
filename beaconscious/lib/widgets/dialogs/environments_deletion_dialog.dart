@@ -25,6 +25,9 @@ class _EnvironmentsDeletionDialogState
         content: Container(),
         actions: [
           TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(AppLocalizations.of(context)!.cancel)),
+          TextButton(
               onPressed: () async {
                 await BlocProvider.of<EnvironmentsCubit>(context)
                     .removeEnvironment(environment: widget.environment)
@@ -34,10 +37,7 @@ class _EnvironmentsDeletionDialogState
                   }
                 });
               },
-              child: Text(AppLocalizations.of(context)!.ok)),
-          TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancel))
+              child: Text(AppLocalizations.of(context)!.ok))
         ],
       );
 }

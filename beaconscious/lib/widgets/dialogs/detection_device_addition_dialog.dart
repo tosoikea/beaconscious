@@ -66,6 +66,9 @@ class _DetectionDeviceAdditionDialogState
         ),
         actions: <Widget>[
           TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(AppLocalizations.of(context)!.cancel)),
+          TextButton(
               onPressed: _formKey.currentState != null &&
                       _formKey.currentState!.validate()
                   ? () async {
@@ -80,9 +83,6 @@ class _DetectionDeviceAdditionDialogState
                     }
                   : null,
               child: Text(AppLocalizations.of(context)!.ok)),
-          TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancel))
         ],
       );
 }

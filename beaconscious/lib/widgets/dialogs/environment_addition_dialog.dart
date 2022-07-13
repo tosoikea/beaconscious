@@ -17,6 +17,7 @@ class EnvironmentAdditionDialog extends StatefulWidget {
 
 class _EnvironmentAdditionDialogState extends State<EnvironmentAdditionDialog> {
   final _formKey = GlobalKey<FormBuilderState>();
+  late final ScrollController _controller;
   bool _nameHasError = true;
   bool _iconHasError = true;
 
@@ -68,6 +69,18 @@ class _EnvironmentAdditionDialogState extends State<EnvironmentAdditionDialog> {
             }),
           ))
       .toList(growable: false);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => CustomDialog(
@@ -149,15 +162,24 @@ class _EnvironmentAdditionDialogState extends State<EnvironmentAdditionDialog> {
                                     ],
                                   )),
                               if (hasFocus)
-                                Container(
-                                  constraints: BoxConstraints(
-                                      maxHeight:
-                                          MediaQuery.of(context).size.height *
-                                              0.2),
-                                  child: SingleChildScrollView(
-                                    child: Wrap(
-                                      spacing: 10,
-                                      children: _getIconItems(state),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    constraints: BoxConstraints(
+                                        maxHeight:
+                                            MediaQuery.of(context).size.height *
+                                                0.2),
+                                    child: Scrollbar(
+                                      controller: _controller,
+                                      thumbVisibility: true,
+                                      radius: const Radius.circular(8),
+                                      child: SingleChildScrollView(
+                                        controller: _controller,
+                                        child: Wrap(
+                                          spacing: 10,
+                                          children: _getIconItems(state),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 )
@@ -177,6 +199,9 @@ class _EnvironmentAdditionDialogState extends State<EnvironmentAdditionDialog> {
               )),
           actions: [
             TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(AppLocalizations.of(context)!.cancel)),
+            TextButton(
                 onPressed: _formKey.currentState != null &&
                         _formKey.currentState!.validate()
                     ? () async {
@@ -191,9 +216,6 @@ class _EnvironmentAdditionDialogState extends State<EnvironmentAdditionDialog> {
                         });
                       }
                     : null,
-                child: Text(AppLocalizations.of(context)!.ok)),
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(AppLocalizations.of(context)!.cancel))
+                child: Text(AppLocalizations.of(context)!.ok))
           ]);
 }
