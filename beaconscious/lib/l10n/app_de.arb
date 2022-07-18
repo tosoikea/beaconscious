@@ -4,6 +4,7 @@
   "enable": "Aktivieren",
   "delete": "Löschen",
   "cancel": "Abbrechen",
+  "discard": "Verwerfen",
   "close": "Schließen",
   "ok": "OK",
   "and": "und",
@@ -24,9 +25,18 @@
   "saturday_short": "Sa",
   "sunday_short": "So",
   "month": "Monat",
-  "environment_card_title" : "Aktuelles Environment",
-  "environment_card_unknown" : "Kein Environment erkannt",
-  "detection_card_title" : "Erkennung",
+  "environment_card_title" : "Environments",
+  "environment_card_detected" : "Aktuell {environment} Environment erkannt",
+  "@environment_card_detected": {
+    "placeholders": {
+      "environment" : {
+        "type": "String",
+        "example": "Schlafen"
+      }
+    }
+  },
+  "environment_card_unknown" : "kein",
+  "detection_card_title" : "Geräte und Orte",
   "detection_card_caption_title" : "In der Nähe von",
   "detection_close_device_zero" : "keinem Gerät",
   "detection_close_location_zero" : "keinem Ort",
@@ -84,7 +94,7 @@
   },
   "environments_title": "Environments",
   "environments_currently_disabled": "Aktuell deaktiviert",
-  "environments_currently_active": "Aktuell aktiv",
+  "environments_currently_active": "Aktuell erkannt",
   "environments_previously_active": "Zuletzt {day} aktiv",
   "@environments_previously_active": {
     "placeholders": {
@@ -124,7 +134,7 @@
   },
   "environment_daytime_window_start": "Beginn der Aktivierung",
   "environment_daytime_window_end": "Ende der Aktivierung",
-  "detection_title": "Erkennung",
+  "detection_title": "Geräte und Orte",
   "detection_currently_detected": "Erkannt",
   "detection_currently_not_detected": "Nicht Erkannt",
   "detection_device_bluetooth_name": "Bluetooth-Name",

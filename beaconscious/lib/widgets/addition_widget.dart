@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 typedef AdditionWidgetBuilder<T extends Object> = Widget Function(
     BuildContext context, ValueNotifier<T?> notifier);
@@ -76,28 +77,42 @@ class _AdditionWidgetState<T extends Object> extends State<AdditionWidget<T>> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     if (_notifier.value != null)
-                      IconButton(
-                          onPressed: (widget.onSave != null)
-                              ? () async {
-                                  await widget.onSave!(_notifier.value!);
-                                  setState(() {
-                                    _isAdding = false;
-                                    _notifier.value = null;
-                                  });
-                                }
-                              : null,
-                          icon: const Icon(Icons.check)),
-                    IconButton(
-                        onPressed: () async {
-                          if (widget.onCancel != null) {
-                            await widget.onCancel!(_notifier);
-                          }
-                          setState(() {
-                            _isAdding = false;
-                            _notifier.value = null;
-                          });
-                        },
-                        icon: const Icon(Icons.close)),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: ElevatedButton.icon(
+                            onPressed: (widget.onSave != null)
+                                ? () async {
+                                    await widget.onSave!(_notifier.value!);
+                                    setState(() {
+                                      _isAdding = false;
+                                      _notifier.value = null;
+                                    });
+                                  }
+                                : null,
+                            icon: Icon(Icons.check,
+                                color: Theme.of(context).colorScheme.primary),
+                            label: Text(AppLocalizations.of(context)!.ok)),
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: ElevatedButton.icon(
+                          onPressed: () async {
+                            if (widget.onCancel != null) {
+                              await widget.onCancel!(_notifier);
+                            }
+                            setState(() {
+                              _isAdding = false;
+                              _notifier.value = null;
+                            });
+                          },
+                          icon: Icon(Icons.close,
+                              color: Theme.of(context).colorScheme.secondary),
+                          label: Text(
+                            AppLocalizations.of(context)!.discard,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary),
+                          )),
+                    ),
                   ],
                 )
               ],

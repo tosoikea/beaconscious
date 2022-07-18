@@ -13,17 +13,17 @@ class CurrentEnvironmentWidget extends StatelessWidget {
   Widget build(BuildContext context) =>
       BlocBuilder<EnvironmentsCubit, EnvironmentsState>(
           builder: (context, state) => CustomCard(
-                leading: (state.current.isEmpty)
-                    ? Icons.warning_rounded
-                    : state.current.icon,
-                leadingBackgroundColor: (state.current.isEmpty)
-                    ? Theme.of(context).colorScheme.error
-                    : null,
-                title: AppLocalizations.of(context)!.environment_card_title,
-                subtitle: (state.current.isEmpty)
-                    ? AppLocalizations.of(context)!.environment_card_unknown
-                    : state.current.name,
-                onTap: () =>
-                    BlocProvider.of<NavigationCubit>(context).toEnvironments(),
-              ));
+              leading: (state.current.isEmpty)
+                  ? Icons.warning_rounded
+                  : state.current.icon,
+              leadingBackgroundColor: (state.current.isEmpty)
+                  ? Theme.of(context).colorScheme.error
+                  : null,
+              title: AppLocalizations.of(context)!.environment_card_title,
+              subtitle: AppLocalizations.of(context)!.environment_card_detected(
+                  (state.current.isEmpty)
+                      ? AppLocalizations.of(context)!.environment_card_unknown
+                      : state.current.name),
+              onTap: () =>
+                  BlocProvider.of<NavigationCubit>(context).toEnvironments()));
 }
